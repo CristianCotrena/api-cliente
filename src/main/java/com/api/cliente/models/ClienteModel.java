@@ -1,6 +1,8 @@
 package com.api.cliente.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -21,6 +23,8 @@ public class ClienteModel implements Serializable {
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false, unique = true)
+    @Size(min = 11, max = 11)
+    @Pattern(regexp = "^[0-9]{11}$")
     private String cpf;
     @Column(nullable = false)
     private String senhaCatraca;
