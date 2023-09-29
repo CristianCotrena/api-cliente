@@ -27,6 +27,7 @@ public class ClienteModel implements Serializable {
     @Pattern(regexp = "^[0-9]{11}$")
     private String cpf;
     @Column(nullable = false)
+    @Size(min = 4, max = 4)
     private String senhaCatraca;
     @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
     private int status;

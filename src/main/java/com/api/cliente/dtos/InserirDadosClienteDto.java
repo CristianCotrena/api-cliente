@@ -1,6 +1,6 @@
 package com.api.cliente.dtos;
 
-public class CadastrarClienteDto {
+public class InserirDadosClienteDto {
 
     private String nome;
     private String dataNascimento;
@@ -8,11 +8,11 @@ public class CadastrarClienteDto {
     private String cpf;
     private String senhaCatraca;
 
-    public CadastrarClienteDto() {
+    public InserirDadosClienteDto() {
 
     }
 
-    public CadastrarClienteDto(
+    public InserirDadosClienteDto(
             String nome,
             String dataNascimento,
             String email,
