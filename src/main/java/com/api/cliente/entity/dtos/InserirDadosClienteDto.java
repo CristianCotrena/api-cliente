@@ -1,56 +1,31 @@
-package com.api.cliente.models;
+package com.api.cliente.entity.dtos;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+public class InserirDadosClienteDto {
 
-import java.io.Serializable;
-import java.util.UUID;
-
-@Entity
-@Table(name = "Clientes")
-public class ClienteModel implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-    @Column(nullable = false)
     private String nome;
-    @Column(nullable = false)
     private String dataNascimento;
-    @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = false, unique = true)
-    @Size(min = 11, max = 11)
-    @Pattern(regexp = "^[0-9]{11}$")
     private String cpf;
-    @Column(nullable = false)
-    @Size(min = 4, max = 4)
     private String senhaCatraca;
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
-    private int status;
+    private Integer status;
 
-    public ClienteModel() {
+    public InserirDadosClienteDto() {
+
     }
 
-    public ClienteModel(UUID id, String nome, String dataNascimento, String email, String cpf, String senhaCatraca, int status) {
-        this.id = id;
+    public InserirDadosClienteDto(
+            String nome,
+            String dataNascimento,
+            String email,
+            String cpf,
+            String senhaCatraca,
+            Integer status) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.email = email;
         this.cpf = cpf;
         this.senhaCatraca = senhaCatraca;
         this.status = status;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -93,11 +68,11 @@ public class ClienteModel implements Serializable {
         this.senhaCatraca = senhaCatraca;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

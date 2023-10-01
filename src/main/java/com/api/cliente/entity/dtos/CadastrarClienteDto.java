@@ -1,4 +1,4 @@
-package com.api.cliente.dtos;
+package com.api.cliente.entity.dtos;
 
 public class CadastrarClienteDto {
 

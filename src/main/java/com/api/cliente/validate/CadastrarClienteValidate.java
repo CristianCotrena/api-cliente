@@ -2,7 +2,7 @@ package com.api.cliente.validate;
 
 import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.core.data.DateUtils;
-import com.api.cliente.dtos.InserirDadosClienteDto;
+import com.api.cliente.entity.dtos.InserirDadosClienteDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,12 @@ public class CadastrarClienteValidate {
             erros.add(new BaseErrorDto("CPF.", "Campo fora do padrão."));
         }
         if (!Pattern.compile("^[0-9]{4}$").matcher(inserirDadosClienteDto.getSenhaCatraca()).matches()) {
-            erros.add(new BaseErrorDto("Senha.", "Campo fora do padrão."));
+            erros.add(new BaseErrorDto("Senha da catrata.", "Campo fora do padrão."));
+        }
+        if (inserirDadosClienteDto.getStatus() != null) {
+            if (!(new String().valueOf(inserirDadosClienteDto.getStatus()).matches("^[0]$"))) {
+                erros.add(new BaseErrorDto("Status.", "Campo fora do padrão."));
+            }
         }
         return erros;
     }

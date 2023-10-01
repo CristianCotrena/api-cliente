@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@OpenAPIDefinition(info = @Info(title = "API Cliente", version = "1", description = "API de clientes da academia."))
 @SpringBootApplication
 @RestController
-@OpenAPIDefinition(info = @Info(title = "Api Cliente Forma NT", version = "1", description = "API Cliente projeto forma NT 2023.02"))
 public class ApiClienteApplication {
 
 	public static void main(String[] args) {

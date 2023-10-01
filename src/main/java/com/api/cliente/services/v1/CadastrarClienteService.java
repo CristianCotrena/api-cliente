@@ -1,12 +1,12 @@
-package com.api.cliente.services;
+package com.api.cliente.services.v1;
 
 import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.builder.ResponseErrorBuilder;
 import com.api.cliente.builder.ResponseSuccessBuilder;
-import com.api.cliente.dtos.CadastrarClienteDto;
-import com.api.cliente.dtos.InserirDadosClienteDto;
-import com.api.cliente.models.ClienteModel;
+import com.api.cliente.entity.dtos.CadastrarClienteDto;
+import com.api.cliente.entity.dtos.InserirDadosClienteDto;
+import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
 import com.api.cliente.validate.CadastrarClienteValidate;
 import org.springframework.http.HttpStatus;
@@ -47,11 +47,17 @@ public class CadastrarClienteService {
         clienteModel.setEmail(inserirDadosClienteDto.getEmail());
         clienteModel.setCpf(inserirDadosClienteDto.getCpf());
         clienteModel.setSenhaCatraca(inserirDadosClienteDto.getSenhaCatraca());
+        if (inserirDadosClienteDto.getStatus() != null) {
+            clienteModel.setStatus(inserirDadosClienteDto.getStatus());
+        } else {
+            clienteModel.setStatus(1);
+        }
 
         UUID cadastrarIdCliente = clienteRepository.save(clienteModel).getId();
         return new ResponseSuccessBuilder<CadastrarClienteDto>(
             HttpStatus.CREATED,
-            new CadastrarClienteDto(cadastrarIdCliente.toString()),
-            "Cliente cadastrado com sucesso.").get().getBody();
+            new CadastrarClienteDto(
+                    cadastrarIdCliente.toString()),
+                "Cliente cadastrado com sucesso.").get().getBody();
     }
 }

@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "69763818-0b21-4576-9af7-aad26ae809a4",
+		"name": "API Cliente Forma NT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25298901"
+	},
+	"item": [
+		{
+			"name": "POST Cadastrar Cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Mateus dos Santos Candiolli\",\r\n    \"dataNascimento\": \"1992-01-31\",\r\n    \"email\": \"mateuscandiolli.1909@gmail.com\",\r\n    \"cpf\": \"03081876010\",\r\n    \"senhaCatraca\": \"3500\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/cliente",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"cliente"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
