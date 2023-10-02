@@ -1,6 +1,7 @@
 package com.api.cliente.ClienteTests;
 
 import com.api.cliente.base.dto.BaseDto;
+import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.entity.dtos.InserirDadosClienteDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -59,6 +61,7 @@ public class CadastrarClienteServiceTests {
 
         assertEquals(HttpStatus.CREATED.value(), baseDto.getResultado().getStatus());
         assertEquals("Cliente cadastrado com sucesso.", baseDto.getResultado().getDescricao());
+        // TESTAR O RETORNO DA ID: ID ESPERADO DEVE SER IGUAL AO CRIADO
     }
 
     @Test
@@ -76,6 +79,7 @@ public class CadastrarClienteServiceTests {
 
         assertEquals(HttpStatus.CREATED.value(), baseDto.getResultado().getStatus());
         assertEquals("Cliente cadastrado com sucesso.", baseDto.getResultado().getDescricao());
+        // TESTAR O RETORNO DA ID: ID ESPERADO DEVE SER IGUAL AO CRIADO
     }
 
     @Test
@@ -86,12 +90,14 @@ public class CadastrarClienteServiceTests {
         when(clienteRepository.findByCpf(any(String.class))).thenReturn(Optional.empty());
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
-        //when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
         BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
+        List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());
         assertEquals("Bad Request", baseDto.getResultado().getDescricao());
+        assertEquals("E-mail.", listaErros.get(0).getCampo());
+        assertEquals("Já cadastrado.", listaErros.get(0).getMensagem());
     }
 
     @Test
@@ -102,12 +108,14 @@ public class CadastrarClienteServiceTests {
         when(clienteRepository.findByCpf(any(String.class))).thenReturn(Optional.of(new ClienteModel()));
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
-        //when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
         BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
+        List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());
         assertEquals("Bad Request", baseDto.getResultado().getDescricao());
+        assertEquals("CPF.", listaErros.get(0).getCampo());
+        assertEquals("Já cadastrado.", listaErros.get(0).getMensagem());
     }
 
     @Test
@@ -118,12 +126,15 @@ public class CadastrarClienteServiceTests {
         when(clienteRepository.findByCpf(any(String.class))).thenReturn(Optional.of(new ClienteModel()));
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
-        //when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
         BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
+        List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());
         assertEquals("Bad Request", baseDto.getResultado().getDescricao());
-        assertEquals(2, baseDto.getErros().size());
+        assertEquals("E-mail.", listaErros.get(0).getCampo());
+        assertEquals("Já cadastrado.", listaErros.get(0).getMensagem());
+        assertEquals("CPF.", listaErros.get(1).getCampo());
+        assertEquals("Já cadastrado.", listaErros.get(1).getMensagem());
     }
 }
