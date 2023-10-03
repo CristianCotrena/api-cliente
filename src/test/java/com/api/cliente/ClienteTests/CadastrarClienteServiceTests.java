@@ -2,6 +2,9 @@ package com.api.cliente.ClienteTests;
 
 import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.base.dto.BaseErrorDto;
+import com.api.cliente.base.dto.BaseResultDto;
+import com.api.cliente.builder.ResponseSuccessBuilder;
+import com.api.cliente.entity.dtos.CadastrarClienteDto;
 import com.api.cliente.entity.dtos.InserirDadosClienteDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
@@ -13,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,13 +59,19 @@ public class CadastrarClienteServiceTests {
         when(clienteRepository.findByCpf(any(String.class))).thenReturn(Optional.empty());
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
+
         when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
         BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
+        CadastrarClienteDto cadastrarClienteDto = new CadastrarClienteDto(clienteModel.getId().toString());
+        BaseResultDto cadastradoComSucesso = new BaseResultDto(baseDto.getResultado().getStatus(), baseDto.getResultado().getDescricao());
+
 
         assertEquals(HttpStatus.CREATED.value(), baseDto.getResultado().getStatus());
         assertEquals("Cliente cadastrado com sucesso.", baseDto.getResultado().getDescricao());
-        // TESTAR O RETORNO DA ID: ID ESPERADO DEVE SER IGUAL AO CRIADO
+        assertEquals(HttpStatus.CREATED.value(), cadastradoComSucesso.getStatus());
+        assertEquals(clienteModel.getId().toString(), cadastrarClienteDto.getClienteId());
+        assertEquals("Cliente cadastrado com sucesso.", cadastradoComSucesso.getDescricao());
     }
 
     @Test
@@ -76,10 +86,14 @@ public class CadastrarClienteServiceTests {
         when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
         BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
+        CadastrarClienteDto cadastrarClienteDto = new CadastrarClienteDto(clienteModel.getId().toString());
+        BaseResultDto cadastradoComSucesso = new BaseResultDto(baseDto.getResultado().getStatus(), baseDto.getResultado().getDescricao());
 
         assertEquals(HttpStatus.CREATED.value(), baseDto.getResultado().getStatus());
         assertEquals("Cliente cadastrado com sucesso.", baseDto.getResultado().getDescricao());
-        // TESTAR O RETORNO DA ID: ID ESPERADO DEVE SER IGUAL AO CRIADO
+        assertEquals(HttpStatus.CREATED.value(), cadastradoComSucesso.getStatus());
+        assertEquals(clienteModel.getId().toString(), cadastrarClienteDto.getClienteId());
+        assertEquals("Cliente cadastrado com sucesso.", cadastradoComSucesso.getDescricao());
     }
 
     @Test

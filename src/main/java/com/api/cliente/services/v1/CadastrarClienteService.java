@@ -56,8 +56,6 @@ public class CadastrarClienteService {
         UUID cadastrarIdCliente = clienteRepository.save(clienteModel).getId();
         return new ResponseSuccessBuilder<CadastrarClienteDto>(
             HttpStatus.CREATED,
-            new CadastrarClienteDto(
-                    cadastrarIdCliente.toString()),
-                "Cliente cadastrado com sucesso.").get().getBody();
+            new CadastrarClienteDto(cadastrarIdCliente.toString()), "Cliente cadastrado com sucesso.").get().getBody();
     }
 }
