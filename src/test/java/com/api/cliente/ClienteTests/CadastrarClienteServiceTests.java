@@ -3,12 +3,12 @@ package com.api.cliente.ClienteTests;
 import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.base.dto.BaseResultDto;
-import com.api.cliente.builder.ResponseSuccessBuilder;
 import com.api.cliente.entity.dtos.CadastrarClienteDto;
 import com.api.cliente.entity.dtos.InserirDadosClienteDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
 import com.api.cliente.services.v1.CadastrarClienteService;
+import com.api.cliente.transformer.ClienteModelTransform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,8 +54,8 @@ public class CadastrarClienteServiceTests {
     public void testeCadastrarCliente_Sucesso() {
         UUID idCliente = UUID.randomUUID();
 
-        when(clienteRepository.findByEmail(any(String.class))).thenReturn(Optional.empty());
-        when(clienteRepository.findByCpf(any(String.class))).thenReturn(Optional.empty());
+        when(clienteRepository.existsByEmail(any(String.class))).thenReturn(Optional.empty());
+        when(clienteRepository.existsByCpf(any(String.class))).thenReturn(Optional.empty());
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
 
@@ -64,22 +63,22 @@ public class CadastrarClienteServiceTests {
 
         BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
         CadastrarClienteDto cadastrarClienteDto = new CadastrarClienteDto(clienteModel.getId().toString());
-        BaseResultDto cadastradoComSucesso = new BaseResultDto(baseDto.getResultado().getStatus(), baseDto.getResultado().getDescricao());
-
+        BaseResultDto cadastradoComSucesso = new BaseResultDto(
+                baseDto.getResultado().getStatus(), baseDto.getResultado().getDescricao());
 
         assertEquals(HttpStatus.CREATED.value(), baseDto.getResultado().getStatus());
-        assertEquals("Cliente cadastrado com sucesso.", baseDto.getResultado().getDescricao());
+        assertEquals("Cadastrado com sucesso.", baseDto.getResultado().getDescricao());
         assertEquals(HttpStatus.CREATED.value(), cadastradoComSucesso.getStatus());
         assertEquals(clienteModel.getId().toString(), cadastrarClienteDto.getClienteId());
-        assertEquals("Cliente cadastrado com sucesso.", cadastradoComSucesso.getDescricao());
+        assertEquals("Cadastrado com sucesso.", cadastradoComSucesso.getDescricao());
     }
 
     @Test
     public void testeCadastrarCliente_Sucesso_StatusZero() {
         UUID idCliente = UUID.randomUUID();
 
-        when(clienteRepository.findByEmail(any(String.class))).thenReturn(Optional.empty());
-        when(clienteRepository.findByCpf(any(String.class))).thenReturn(Optional.empty());
+        when(clienteRepository.existsByEmail(any(String.class))).thenReturn(Optional.empty());
+        when(clienteRepository.existsByCpf(any(String.class))).thenReturn(Optional.empty());
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
         clienteModel.setStatus(0);
@@ -90,18 +89,18 @@ public class CadastrarClienteServiceTests {
         BaseResultDto cadastradoComSucesso = new BaseResultDto(baseDto.getResultado().getStatus(), baseDto.getResultado().getDescricao());
 
         assertEquals(HttpStatus.CREATED.value(), baseDto.getResultado().getStatus());
-        assertEquals("Cliente cadastrado com sucesso.", baseDto.getResultado().getDescricao());
+        assertEquals("Cadastrado com sucesso.", baseDto.getResultado().getDescricao());
         assertEquals(HttpStatus.CREATED.value(), cadastradoComSucesso.getStatus());
         assertEquals(clienteModel.getId().toString(), cadastrarClienteDto.getClienteId());
-        assertEquals("Cliente cadastrado com sucesso.", cadastradoComSucesso.getDescricao());
+        assertEquals("Cadastrado com sucesso.", cadastradoComSucesso.getDescricao());
     }
 
     @Test
     public void testeCadastrarCliente_Erro_EmailJaExiste() {
         UUID idCliente = UUID.randomUUID();
 
-        when(clienteRepository.findByEmail(any(String.class))).thenReturn(Optional.of(new ClienteModel()));
-        when(clienteRepository.findByCpf(any(String.class))).thenReturn(Optional.empty());
+        when(clienteRepository.existsByEmail(any(String.class))).thenReturn(Optional.of(true));
+        when(clienteRepository.existsByCpf(any(String.class))).thenReturn(Optional.empty());
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
 
@@ -118,8 +117,8 @@ public class CadastrarClienteServiceTests {
     public void testeCadastrarCliente_Erro_CpfJaExiste() {
         UUID idCliente = UUID.randomUUID();
 
-        when(clienteRepository.findByEmail(any(String.class))).thenReturn(Optional.empty());
-        when(clienteRepository.findByCpf(any(String.class))).thenReturn(Optional.of(new ClienteModel()));
+        when(clienteRepository.existsByEmail(any(String.class))).thenReturn(Optional.empty());
+        when(clienteRepository.existsByCpf(any(String.class))).thenReturn(Optional.of(true));
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
 
@@ -136,8 +135,8 @@ public class CadastrarClienteServiceTests {
     public void testeCadastrarCliente_Erro_EmailCpfJaExiste() {
         UUID idCliente = UUID.randomUUID();
 
-        when(clienteRepository.findByEmail(any(String.class))).thenReturn(Optional.of(new ClienteModel()));
-        when(clienteRepository.findByCpf(any(String.class))).thenReturn(Optional.of(new ClienteModel()));
+        when(clienteRepository.existsByEmail(any(String.class))).thenReturn(Optional.of(true));
+        when(clienteRepository.existsByCpf(any(String.class))).thenReturn(Optional.of(true));
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
 
