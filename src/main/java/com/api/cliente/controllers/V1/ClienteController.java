@@ -1,4 +1,4 @@
-package com.api.cliente.controllers.V1;
+/vpackage com.api.cliente.controllers.V1;
 
 import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.entity.dtos.InserirDadosClienteDto;
