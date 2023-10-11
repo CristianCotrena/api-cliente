@@ -8,7 +8,6 @@ import com.api.cliente.entity.dtos.InserirDadosClienteDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
 import com.api.cliente.services.v1.CadastrarClienteService;
-import com.api.cliente.transformer.ClienteModelTransform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
