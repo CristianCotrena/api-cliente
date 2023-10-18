@@ -5,7 +5,7 @@ import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.builder.ResponseErrorBuilder;
 import com.api.cliente.builder.ResponseSuccessBuilder;
 import com.api.cliente.constants.MensagensErros;
-import com.api.cliente.entity.dtos.ClienteRequestDto;
+import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
 import com.api.cliente.entity.dtos.ClienteResponseDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
@@ -31,8 +31,11 @@ public class AtualizarClienteService {
     }
 
     @Transactional
-    public BaseDto atualizarCliente(UUID idCliente, ClienteRequestDto clienteRequestDto) {
-        List<BaseErrorDto> erros = new AtualizarClienteValidate().validate(clienteRequestDto);
+    public BaseDto atualizarCliente(
+            UUID idCliente,
+            ClienteAtualizarRequestDto clienteAtualizarRequestDto) {
+
+        List<BaseErrorDto> erros = new AtualizarClienteValidate().validate(clienteAtualizarRequestDto);
         ResponseErrorBuilder resultado = new ResponseErrorBuilder(HttpStatus.BAD_REQUEST, erros);
         int contadorEmail = 0;
         int contadorSenhaCatraca = 0;
@@ -45,16 +48,16 @@ public class AtualizarClienteService {
         Optional<ClienteModel> clienteExistente = clienteRepository.findById(idCliente);
         ClienteModel clienteModel = clienteExistente.get();
 
-        if (clienteRequestDto.getEmail() != null && !clienteRequestDto.getEmail().isEmpty()) {
-            if (clienteExistente.get().getEmail().equals(clienteRequestDto.getEmail())) {
+        if (clienteAtualizarRequestDto.getEmail() != null && !clienteAtualizarRequestDto.getEmail().isEmpty()) {
+            if (clienteExistente.get().getEmail().equals(clienteAtualizarRequestDto.getEmail())) {
                 erros.add(new BaseErrorDto("E-mail.", MensagensErros.CAMPO_DIFERENTE_ANTERIOR));
-            } else if (clienteRepository.existsByEmail(clienteRequestDto.getEmail()).orElse(false)) {
+            } else if (clienteRepository.existsByEmail(clienteAtualizarRequestDto.getEmail()).orElse(false)) {
                 erros.add(new BaseErrorDto("E-mail.", MensagensErros.DADO_JA_CADASTRADO));
             }
             contadorEmail = 1;
         }
-        if (clienteRequestDto.getSenhaCatraca() != null && !clienteRequestDto.getSenhaCatraca().isEmpty()) {
-            if (clienteExistente.get().getSenhaCatraca().equals(clienteRequestDto.getSenhaCatraca())) {
+        if (clienteAtualizarRequestDto.getSenhaCatraca() != null && !clienteAtualizarRequestDto.getSenhaCatraca().isEmpty()) {
+            if (clienteExistente.get().getSenhaCatraca().equals(clienteAtualizarRequestDto.getSenhaCatraca())) {
                 erros.add(new BaseErrorDto("Senha da catraca.", MensagensErros.CAMPO_DIFERENTE_ANTERIOR));
             }
             contadorSenhaCatraca = 1;
@@ -66,7 +69,7 @@ public class AtualizarClienteService {
             resultado = new ResponseErrorBuilder(HttpStatus.BAD_REQUEST, erros);
             return resultado.get().getBody();
         }
-        clienteModel = new ClienteModelTransform().transformerAtualizarCliente(clienteRequestDto, clienteModel);
+        clienteModel = new ClienteModelTransform().transformerAtualizarCliente(clienteAtualizarRequestDto, clienteModel);
 
         ClienteModel atualizarCliente = clienteRepository.save(clienteModel);
 

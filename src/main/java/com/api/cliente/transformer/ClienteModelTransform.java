@@ -1,5 +1,6 @@
 package com.api.cliente.transformer;
 
+import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
 import com.api.cliente.entity.dtos.ClienteRequestDto;
 import com.api.cliente.entity.models.ClienteModel;
 
@@ -21,7 +22,7 @@ public class ClienteModelTransform {
         return clienteModel;
     }
 
-    public ClienteModel transformerAtualizarCliente(ClienteRequestDto dto, ClienteModel clienteModel) {
+    public ClienteModel transformerAtualizarCliente(ClienteAtualizarRequestDto dto, ClienteModel clienteModel) {
         if (dto.getEmail() != null && !dto.getEmail().isEmpty()) {
             clienteModel.setEmail(dto.getEmail());
         } else {

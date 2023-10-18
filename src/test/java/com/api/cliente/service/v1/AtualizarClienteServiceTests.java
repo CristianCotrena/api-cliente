@@ -3,11 +3,11 @@ package com.api.cliente.service.v1;
 import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.base.dto.BaseResultDto;
-import com.api.cliente.entity.dtos.ClienteRequestDto;
+import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
 import com.api.cliente.entity.dtos.ClienteResponseDto;
 import com.api.cliente.entity.models.ClienteModel;
+import com.api.cliente.mock.ClienteAtualizarRequestDtoBuilder;
 import com.api.cliente.mock.ClienteModelBuilder;
-import com.api.cliente.mock.ClienteRequestDtoBuilder;
 import com.api.cliente.repositories.ClienteRepository;
 import com.api.cliente.services.v1.AtualizarClienteService;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,15 +35,15 @@ class AtualizarClienteServiceTests {
     @Autowired
     private AtualizarClienteService atualizarClienteService;
 
-    private ClienteRequestDto clienteRequestDto;
+    private ClienteAtualizarRequestDto clienteAtualizarRequestDto;
 
     @BeforeEach
     public void setup() {
         clienteRepository = mock(ClienteRepository.class);
         atualizarClienteService =  new AtualizarClienteService(clienteRepository);
 
-        clienteRequestDto = new ClienteRequestDto();
-        clienteRequestDto = ClienteRequestDtoBuilder.atualizar();
+        clienteAtualizarRequestDto = new ClienteAtualizarRequestDto();
+        clienteAtualizarRequestDto = ClienteAtualizarRequestDtoBuilder.build();
     }
 
     @Test
@@ -56,7 +56,7 @@ class AtualizarClienteServiceTests {
 
         when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteRequestDto);
+        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteAtualizarRequestDto);
         ClienteResponseDto clienteResponseDto = new ClienteResponseDto(
                 clienteModel.getNome().toString(),
                 clienteModel.getEmail().toString(),
@@ -81,8 +81,8 @@ class AtualizarClienteServiceTests {
 
         ClienteModel clienteModel = ClienteModelBuilder.build();
 
-        ClienteRequestDto clienteRequestDtoApenasEmail = new ClienteRequestDto();
-        clienteRequestDtoApenasEmail.setEmail("atualizandoapenasemail@gmail.com");
+        ClienteAtualizarRequestDto clienteAtualizarRequestDtoApenasEmail = new ClienteAtualizarRequestDto();
+        clienteAtualizarRequestDtoApenasEmail.setEmail("atualizandoapenasemail@gmail.com");
 
         when(clienteRepository.existsById(clienteModel.getId())).thenReturn(true);
         when(clienteRepository.findById(clienteModel.getId())).thenReturn(Optional.of(clienteModel));
@@ -90,7 +90,7 @@ class AtualizarClienteServiceTests {
 
         when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteRequestDtoApenasEmail);
+        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteAtualizarRequestDtoApenasEmail);
         ClienteResponseDto clienteResponseDto = new ClienteResponseDto(
                 clienteModel.getNome().toString(),
                 clienteModel.getEmail().toString(),
@@ -114,15 +114,15 @@ class AtualizarClienteServiceTests {
 
         ClienteModel clienteModel = ClienteModelBuilder.build();
 
-        ClienteRequestDto clienteRequestDtoApenasSenha = new ClienteRequestDto();
-        clienteRequestDtoApenasSenha.setSenhaCatraca("5555");
+        ClienteAtualizarRequestDto clienteAtualizarRequestDtoApenasSenha = new ClienteAtualizarRequestDto();
+        clienteAtualizarRequestDtoApenasSenha.setSenhaCatraca("5555");
 
         when(clienteRepository.existsById(clienteModel.getId())).thenReturn(true);
         when(clienteRepository.findById(clienteModel.getId())).thenReturn(Optional.of(clienteModel));
 
         when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteRequestDtoApenasSenha);
+        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteAtualizarRequestDtoApenasSenha);
         ClienteResponseDto clienteResponseDto = new ClienteResponseDto(
                 clienteModel.getNome().toString(),
                 null,
@@ -147,14 +147,13 @@ class AtualizarClienteServiceTests {
         ClienteModel clienteModel = ClienteModelBuilder.build();
         when(clienteRepository.existsById(clienteModel.getId())).thenReturn(false);
 
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteRequestDto);
+        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteAtualizarRequestDto);
         List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());
         assertEquals("Bad Request", baseDto.getResultado().getDescricao());
         assertEquals("Id Cliente.", listaErros.get(0).getCampo());
         assertEquals("Dado inexistente.", listaErros.get(0).getMensagem());
-
     }
 
     @Test
@@ -165,7 +164,7 @@ class AtualizarClienteServiceTests {
         when(clienteRepository.findById(clienteModel.getId())).thenReturn(Optional.of(clienteModel));
         when(clienteRepository.existsByEmail(any(String.class))).thenReturn(Optional.of(true));
 
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteRequestDto);
+        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteAtualizarRequestDto);
         List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());
@@ -181,9 +180,9 @@ class AtualizarClienteServiceTests {
 
         when(clienteRepository.existsById(clienteModel.getId())).thenReturn(true);
         when(clienteRepository.findById(clienteModel.getId())).thenReturn(Optional.of(clienteModel));
-        clienteRequestDto.setEmail(clienteModel.getEmail());
+        clienteAtualizarRequestDto.setEmail(clienteModel.getEmail());
 
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteRequestDto);
+        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteAtualizarRequestDto);
         List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());
@@ -199,9 +198,9 @@ class AtualizarClienteServiceTests {
 
         when(clienteRepository.existsById(clienteModel.getId())).thenReturn(true);
         when(clienteRepository.findById(clienteModel.getId())).thenReturn(Optional.of(clienteModel));
-        clienteRequestDto.setSenhaCatraca(clienteModel.getSenhaCatraca());
+        clienteAtualizarRequestDto.setSenhaCatraca(clienteModel.getSenhaCatraca());
 
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteRequestDto);
+        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteAtualizarRequestDto);
         List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());
@@ -217,10 +216,10 @@ class AtualizarClienteServiceTests {
 
         when(clienteRepository.existsById(clienteModel.getId())).thenReturn(true);
         when(clienteRepository.findById(clienteModel.getId())).thenReturn(Optional.of(clienteModel));
-        clienteRequestDto.setEmail(clienteModel.getEmail());
-        clienteRequestDto.setSenhaCatraca(clienteModel.getSenhaCatraca());
+        clienteAtualizarRequestDto.setEmail(clienteModel.getEmail());
+        clienteAtualizarRequestDto.setSenhaCatraca(clienteModel.getSenhaCatraca());
 
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteRequestDto);
+        BaseDto baseDto = atualizarClienteService.atualizarCliente(clienteModel.getId(), clienteAtualizarRequestDto);
         List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());

@@ -1,6 +1,7 @@
 package com.api.cliente.controllers.V1;
 
 import com.api.cliente.base.dto.BaseDto;
+import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
 import com.api.cliente.entity.dtos.ClienteRequestDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.services.v1.AtualizarClienteService;
@@ -94,8 +95,8 @@ public class ClienteController {
     @PutMapping("/{id}")
     public ResponseEntity<BaseDto<ClienteModel>> atualizarCiente(
             @PathVariable(value = "id") UUID idCliente,
-            @RequestBody ClienteRequestDto clienteRequestDto) {
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(idCliente, clienteRequestDto);
+            @RequestBody ClienteAtualizarRequestDto clienteAtualizarRequestDto) {
+        BaseDto baseDto = atualizarClienteService.atualizarCliente(idCliente, clienteAtualizarRequestDto);
         return ResponseEntity.status(baseDto.getResultado().getStatus()).body(baseDto);
     }
 }

@@ -14,12 +14,4 @@ public class ClienteRequestDtoBuilder {
         request.setSenhaCatraca("9999");
         return request;
     }
-
-    public static ClienteRequestDto atualizar() {
-
-        var request = new ClienteRequestDto();
-        request.setEmail("emailrequestdto@email.com");
-        request.setSenhaCatraca("9999");
-        return request;
-    }
 }
