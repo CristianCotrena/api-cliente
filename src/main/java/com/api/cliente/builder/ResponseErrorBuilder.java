@@ -3,11 +3,9 @@ package com.api.cliente.builder;
 import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.base.dto.BaseResultDto;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ResponseErrorBuilder {
@@ -16,19 +14,19 @@ public class ResponseErrorBuilder {
 
     public ResponseErrorBuilder(HttpStatus status, String mensagem) {
         BaseResultDto resultado = new BaseResultDto(status.value(), mensagem);
-        BaseDto<Void> baseDto = new BaseDto<>(null, new ArrayList<>(), resultado);
+        BaseDto<Void> baseDto = new BaseDto<>(null);
         this.resultado = ResponseEntity.status(status.value()).body(baseDto);
     }
 
     public ResponseErrorBuilder(HttpStatus status, List<BaseErrorDto> erros) {
         BaseResultDto resultado = new BaseResultDto(status.value(), status.getReasonPhrase());
-        BaseDto<Void> baseDto = new BaseDto<>(null, erros, resultado);
+        BaseDto<Void> baseDto = new BaseDto<>(null);
         this.resultado = ResponseEntity.status(status.value()).body(baseDto);
     }
 
     public ResponseErrorBuilder(HttpStatus status, String mensagem, List<BaseErrorDto> erros) {
         BaseResultDto resultado = new BaseResultDto(status.value(), mensagem);
-        BaseDto<Void> baseDto = new BaseDto<>(null, erros, resultado);
+        BaseDto<Void> baseDto = new BaseDto<>(null);
         this.resultado = ResponseEntity.status(status.value()).body(baseDto);
     }
 

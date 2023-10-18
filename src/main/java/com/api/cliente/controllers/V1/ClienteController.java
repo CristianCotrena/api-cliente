@@ -4,6 +4,7 @@ import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.entity.dtos.ClienteRequestDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.services.v1.AtualizarClienteService;
+import com.api.cliente.services.v1.BuscarClienteService;
 import com.api.cliente.services.v1.CadastrarClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,22 +23,26 @@ import java.util.UUID;
 public class ClienteController {
 
     CadastrarClienteService cadastrarClienteService;
+
     AtualizarClienteService atualizarClienteService;
+    BuscarClienteService buscarClienteService;
 
     public ClienteController(
             CadastrarClienteService cadastrarClienteService,
-            AtualizarClienteService atualizarClienteService) {
+            AtualizarClienteService atualizarClienteService,
+            BuscarClienteService buscarClienteService) {
         this.cadastrarClienteService = cadastrarClienteService;
         this.atualizarClienteService = atualizarClienteService;
+        this.buscarClienteService = buscarClienteService;
     }
 
     @Operation(summary = "Cadastra um novo cliente.", method = "POST")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Cliente cadastrado com sucesso.", content = {
-                @Content(
-                        mediaType = "application/json",
-                        schema = @Schema(type = "string", example = "Cliente cadastrado com sucesso.")
-                )
+                    @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(type = "string", example = "Cliente cadastrado com sucesso.")
+                    )
             }),
             @ApiResponse(responseCode = "400", description = "E-mail já cadastrado.", content = {
                     @Content(
@@ -98,4 +103,11 @@ public class ClienteController {
         BaseDto baseDto = atualizarClienteService.atualizarCliente(idCliente, clienteRequestDto);
         return ResponseEntity.status(baseDto.getResultado().getStatus()).body(baseDto);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BaseDto<ClienteModel>> buscarCliente(@PathVariable("id") UUID id) {
+            BaseDto<ClienteModel> baseDto = buscarClienteService.buscarCliente(id);
+            return ResponseEntity.ok(baseDto);
+    }
+
 }

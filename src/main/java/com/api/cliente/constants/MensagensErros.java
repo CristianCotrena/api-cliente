@@ -8,4 +8,5 @@ public @interface MensagensErros {
     String NAO_PERMITIDO_ALTERAR = "Não é permitido alterar esse campo.";
     String CAMPO_DIFERENTE_ANTERIOR = "Deve ser diferente do anterior.";
     String INEXISTENTE = "Dado inexistente.";
+    String DADOS_NAO_ENCONTRADO = "Dados nao encontrados";
 }
