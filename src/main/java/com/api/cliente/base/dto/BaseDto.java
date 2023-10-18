@@ -8,7 +8,7 @@ public class BaseDto<T> {
     private List<BaseErrorDto> erros;
     private BaseResultDto resultado;
 
-    public BaseDto(T dados, List<BaseErrorDto> erros, BaseResultDto resultado) {
+    public BaseDto(T dados) {
         this.dados = dados;
         this.erros = erros;
         this.resultado = resultado;
