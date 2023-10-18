@@ -7,32 +7,642 @@
 	},
 	"item": [
 		{
-			"name": "POST Cadastrar Cliente",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Mateus dos Santos Candiolli\",\r\n    \"dataNascimento\": \"1992-01-31\",\r\n    \"email\": \"mateuscandiolli.1909@gmail.com\",\r\n    \"cpf\": \"03081876010\",\r\n    \"senhaCatraca\": \"3500\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Cadastrar Cliente",
+			"item": [
+				{
+					"name": "POST Cadastrar Cliente Sucesso",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de Criar Cliente Zero Quatro\",\r\n    \"dataNascimento\": \"1990-01-01\",\r\n    \"email\": \"testecriarcliente4@gmail.com\",\r\n    \"cpf\": \"77777777754\",\r\n    \"senhaCatraca\": \"3500\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/v1/cliente",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"v1",
-						"cliente"
-					]
+				{
+					"name": "POST Cadastrar Cliente Fracasso Email Repetido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de Criar Cliente\",\r\n    \"dataNascimento\": \"1992-03-03\",\r\n    \"email\": \"testecriarcliente@gmail.com\",\r\n    \"cpf\": \"99999999999\",\r\n    \"senhaCatraca\": \"3500\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Cadastrar Cliente Fracasso CPF Repetido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de Criar Cliente\",\r\n    \"dataNascimento\": \"1992-03-03\",\r\n    \"email\": \"testecriarcliente2@gmail.com\",\r\n    \"cpf\": \"09999999999\",\r\n    \"senhaCatraca\": \"3500\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Cadastrar Cliente Fracasso Email e CPF Repetidos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de Criar Cliente\",\r\n    \"dataNascimento\": \"1992-03-03\",\r\n    \"email\": \"testecriarcliente@gmail.com\",\r\n    \"cpf\": \"09999999999\",\r\n    \"senhaCatraca\": \"3500\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Cadastrar Cliente Fracasso Todos os Dados Fora do Padrão",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"TestedeCriarCliente\",\r\n    \"dataNascimento\": \"2022-03-03\",\r\n    \"email\": \"testecriarclientegmail.com\",\r\n    \"cpf\": \"9999999999\",\r\n    \"senhaCatraca\": \"350\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Cadastrar Cliente Fracasso Nome Fora do Padrão",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"TestedeCriarCliente\",\r\n    \"dataNascimento\": \"1992-03-03\",\r\n    \"email\": \"testecriarcliente@gmail.com\",\r\n    \"cpf\": \"99999999999\",\r\n    \"senhaCatraca\": \"3501\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Cadastrar Cliente Fracasso Data Nascimento Fora do Padrão",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de Criar Cliente\",\r\n    \"dataNascimento\": \"2022-03-03\",\r\n    \"email\": \"testecriarcliente@gmail.com\",\r\n    \"cpf\": \"99999999999\",\r\n    \"senhaCatraca\": \"3501\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Cadastrar Cliente Fracasso Email Fora do Padrão",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de Criar Cliente\",\r\n    \"dataNascimento\": \"1992-03-03\",\r\n    \"email\": \"testecriarclientegmail.com\",\r\n    \"cpf\": \"99999999991\",\r\n    \"senhaCatraca\": \"3501\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Cadastrar Cliente Fracasso CPF Fora do Padrão",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de Criar Cliente\",\r\n    \"dataNascimento\": \"1992-03-03\",\r\n    \"email\": \"testecriarcliente@gmail.com\",\r\n    \"cpf\": \"9999999999\",\r\n    \"senhaCatraca\": \"3501\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Cadastrar Cliente Fracasso Senha Catraca Fora do Padrão",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de Criar Cliente\",\r\n    \"dataNascimento\": \"1992-03-03\",\r\n    \"email\": \"testecriarcliente@gmail.com\",\r\n    \"cpf\": \"99999999991\",\r\n    \"senhaCatraca\": \"350\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Atualizar Cliente",
+			"item": [
+				{
+					"name": "01 - SUCESSO Atualizar e-mail e senha",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testandosucessoalteraremailesenha@gmail.com\",\r\n    \"senhaCatraca\": \"9999\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - SUCESSO Atualizar apenas e-mail",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testandosucessoalteraremailesenha02@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - SUCESSO Atualizar apenas senha",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"senhaCatraca\": \"0001\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - FRACASSO Atualizar e-mail e senha fora do padrão",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testandosucessoalteraremailesenhagmail.com\",\r\n    \"senhaCatraca\": \"999\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05 - FRACASSO Atualizar e-mail fora do padrão",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testandosucessoalteraremailesenhagmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06 - FRACASSO Atualizar senha fora do padrão",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"senhaCatraca\": \"999\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - FRACASSO Atualizar e-mail igual a outro cadastro e senha igual a anterior",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testecriarcliente4@gmail.com\",\r\n    \"senhaCatraca\": \"0001\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - FRACASSO Atualizar e-mail e senha iguais aos anteriores",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testandosucessoalteraremailesenha02@gmail.com\",\r\n    \"senhaCatraca\": \"0001\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - FRACASSO Atualizar todos os campos e e-mail e senha validos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de ALTERAR NOME\",\r\n    \"dataNascimento\": \"1980-03-03\",\r\n    \"email\": \"alteraremailparaumvalido@gmail.com\",\r\n    \"cpf\": \"56287415930\",\r\n    \"senhaCatraca\": \"7579\",\r\n    \"status\": 0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10 - FRACASSO Atualizar todos os campos e e-mail e senha fora do padrão",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de ALTERAR NOME\",\r\n    \"dataNascimento\": \"1980-03-03\",\r\n    \"email\": \"alteraremailparaumvalidogmail.com\",\r\n    \"cpf\": \"56287415930\",\r\n    \"senhaCatraca\": \"757\",\r\n    \"status\": 0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11 - FRACASSO Atualizar todos os campos e e-mail e senha iguais anteriores",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de ALTERAR NOME\",\r\n    \"dataNascimento\": \"1980-03-03\",\r\n    \"email\": \"testandosucessoalteraremailesenha02@gmail.com\",\r\n    \"cpf\": \"56287415930\",\r\n    \"senhaCatraca\": \"0001\",\r\n    \"status\": 0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12 - FRACASSO Atualizar todos os campos e e-mail igual outro cadastro e senha correta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste de ALTERAR NOME\",\r\n    \"dataNascimento\": \"1980-03-03\",\r\n    \"email\": \"testecriarcliente4@gmail.com\",\r\n    \"cpf\": \"56287415930\",\r\n    \"senhaCatraca\": \"1212\",\r\n    \"status\": 0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/17f1a4f4-519b-4982-b286-89c210ce0cdd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"17f1a4f4-519b-4982-b286-89c210ce0cdd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
