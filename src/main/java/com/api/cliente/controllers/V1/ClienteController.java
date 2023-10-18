@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Tag(name = "API Cliente")
@@ -59,8 +60,21 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BaseDto<ClienteModel>> buscarCliente(@PathVariable("id") UUID id) {
-            BaseDto<ClienteModel> baseDto = buscarClienteService.buscarCliente(id);
-            return ResponseEntity.ok(baseDto);
+        BaseDto<ClienteModel> baseDto = buscarClienteService.buscarClientePorId(id);
+        return ResponseEntity.ok(baseDto);
+    }
+
+    @GetMapping("/cpf")
+
+    public ResponseEntity<BaseDto<Boolean>> buscarClientePorCpf(@RequestParam String cpf) {
+        BaseDto<Boolean> baseDto = buscarClienteService.buscarClientePorCpf(cpf);
+        return ResponseEntity.ok(baseDto);
+    }
+
+    @GetMapping("/email")
+    public ResponseEntity<BaseDto<Boolean>> buscarClientePorEmail(@RequestParam String email) {
+        BaseDto<Boolean> baseDto = buscarClienteService.buscarClientePorEmail(email);
+        return ResponseEntity.ok(baseDto);
     }
 
 }

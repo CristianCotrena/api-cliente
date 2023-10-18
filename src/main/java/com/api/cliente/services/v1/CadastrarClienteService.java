@@ -12,7 +12,6 @@ import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
 import com.api.cliente.transformer.ClienteModelTransform;
 import com.api.cliente.validate.CadastrarClienteValidate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +48,7 @@ public class CadastrarClienteService {
 
         UUID cadastrarIdCliente = clienteRepository.save(clienteModel).getId();
         return new ResponseSuccessBuilder<CadastrarClienteDto>(
-            HttpStatus.CREATED,
-            new CadastrarClienteDto(cadastrarIdCliente.toString()), MensagensSucessos.CADASTRADO_COM_SUCESSO).get().getBody();
+                HttpStatus.CREATED,
+                new CadastrarClienteDto(cadastrarIdCliente.toString()), MensagensSucessos.CADASTRADO_COM_SUCESSO).get().getBody();
     }
 }
