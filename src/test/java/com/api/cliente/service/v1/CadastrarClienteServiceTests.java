@@ -1,10 +1,10 @@
-package com.api.cliente.ClienteTests;
+package com.api.cliente.service.v1;
 
 import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.base.dto.BaseResultDto;
-import com.api.cliente.entity.dtos.CadastrarClienteDto;
-import com.api.cliente.entity.dtos.InserirDadosClienteDto;
+import com.api.cliente.entity.dtos.ClienteResponseDto;
+import com.api.cliente.entity.dtos.ClienteRequestDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
 import com.api.cliente.services.v1.CadastrarClienteService;
@@ -34,19 +34,19 @@ public class CadastrarClienteServiceTests {
     @Autowired
     private CadastrarClienteService cadastrarClienteService;
 
-    private InserirDadosClienteDto inserirDadosClienteDto;
+    private ClienteRequestDto clienteRequestDto;
 
     @BeforeEach
     public void setup() {
         clienteRepository = mock(ClienteRepository.class);
         cadastrarClienteService = new CadastrarClienteService(clienteRepository);
 
-        inserirDadosClienteDto = new InserirDadosClienteDto();
-        inserirDadosClienteDto.setNome("Nome de Teste");
-        inserirDadosClienteDto.setDataNascimento("1992-01-31");
-        inserirDadosClienteDto.setEmail("emailteste@teste.com");
-        inserirDadosClienteDto.setCpf("12345678912");
-        inserirDadosClienteDto.setSenhaCatraca("1234");
+        clienteRequestDto = new ClienteRequestDto();
+        clienteRequestDto.setNome("Nome de Teste");
+        clienteRequestDto.setDataNascimento("1992-01-31");
+        clienteRequestDto.setEmail("emailteste@teste.com");
+        clienteRequestDto.setCpf("12345678912");
+        clienteRequestDto.setSenhaCatraca("1234");
     }
 
     @Test
@@ -60,15 +60,15 @@ public class CadastrarClienteServiceTests {
 
         when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
-        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
-        CadastrarClienteDto cadastrarClienteDto = new CadastrarClienteDto(clienteModel.getId().toString());
+        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(clienteRequestDto);
+        ClienteResponseDto clienteResponseDto = new ClienteResponseDto(clienteModel.getId().toString());
         BaseResultDto cadastradoComSucesso = new BaseResultDto(
                 baseDto.getResultado().getStatus(), baseDto.getResultado().getDescricao());
 
         assertEquals(HttpStatus.CREATED.value(), baseDto.getResultado().getStatus());
         assertEquals("Cadastrado com sucesso.", baseDto.getResultado().getDescricao());
         assertEquals(HttpStatus.CREATED.value(), cadastradoComSucesso.getStatus());
-        assertEquals(clienteModel.getId().toString(), cadastrarClienteDto.getClienteId());
+        assertEquals(clienteModel.getId().toString(), clienteResponseDto.getClienteId());
         assertEquals("Cadastrado com sucesso.", cadastradoComSucesso.getDescricao());
     }
 
@@ -83,14 +83,14 @@ public class CadastrarClienteServiceTests {
         clienteModel.setStatus(0);
         when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
-        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
-        CadastrarClienteDto cadastrarClienteDto = new CadastrarClienteDto(clienteModel.getId().toString());
+        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(clienteRequestDto);
+        ClienteResponseDto clienteResponseDto = new ClienteResponseDto(clienteModel.getId().toString());
         BaseResultDto cadastradoComSucesso = new BaseResultDto(baseDto.getResultado().getStatus(), baseDto.getResultado().getDescricao());
 
         assertEquals(HttpStatus.CREATED.value(), baseDto.getResultado().getStatus());
         assertEquals("Cadastrado com sucesso.", baseDto.getResultado().getDescricao());
         assertEquals(HttpStatus.CREATED.value(), cadastradoComSucesso.getStatus());
-        assertEquals(clienteModel.getId().toString(), cadastrarClienteDto.getClienteId());
+        assertEquals(clienteModel.getId().toString(), clienteResponseDto.getClienteId());
         assertEquals("Cadastrado com sucesso.", cadastradoComSucesso.getDescricao());
     }
 
@@ -103,7 +103,7 @@ public class CadastrarClienteServiceTests {
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
 
-        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
+        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(clienteRequestDto);
         List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());
@@ -121,7 +121,7 @@ public class CadastrarClienteServiceTests {
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
 
-        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
+        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(clienteRequestDto);
         List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());
@@ -139,7 +139,7 @@ public class CadastrarClienteServiceTests {
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(idCliente);
 
-        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(inserirDadosClienteDto);
+        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(clienteRequestDto);
         List<BaseErrorDto> listaErros = baseDto.getErros();
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), baseDto.getResultado().getStatus());
