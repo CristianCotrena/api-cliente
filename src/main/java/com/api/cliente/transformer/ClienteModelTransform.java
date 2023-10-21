@@ -13,12 +13,7 @@ public class ClienteModelTransform {
         clienteModel.setEmail(dto.getEmail());
         clienteModel.setCpf(dto.getCpf());
         clienteModel.setSenhaCatraca(dto.getSenhaCatraca());
-
-        if (dto.getStatus() != null) {
-            clienteModel.setStatus(dto.getStatus());
-        } else {
-            clienteModel.setStatus(1);
-        }
+        clienteModel.setStatus(1);
         return clienteModel;
     }
 

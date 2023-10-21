@@ -1,6 +1,5 @@
 package com.api.cliente.entity.models;
 
-import com.api.cliente.entity.dtos.InserirDadosClienteDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

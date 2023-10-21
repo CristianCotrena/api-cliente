@@ -60,11 +60,6 @@ public class CadastrarClienteValidate {
         if (!Pattern.compile("^[0-9]{4}$").matcher(clienteRequestDto.getSenhaCatraca()).matches()) {
             erros.add(new BaseErrorDto("Senha da catrata.", MensagensErros.CAMPO_FORA_DO_PADRAO));
         }
-        if (clienteRequestDto.getStatus() != null) {
-            if (!(new String().valueOf(clienteRequestDto.getStatus()).matches("^[0]$"))) {
-                erros.add(new BaseErrorDto("Status.", MensagensErros.CAMPO_FORA_DO_PADRAO));
-            }
-        }
         return erros;
     }
 }
