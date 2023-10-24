@@ -1,20 +1,20 @@
 package com.api.cliente.entity.dtos;
 
-public class ClienteResponseDto {
+public class CadastrarClienteResponseDto {
 
     private String clienteId;
     private String nome;
     private String email;
     private String senhaCatraca;
 
-    public ClienteResponseDto() {
+    public CadastrarClienteResponseDto() {
     }
 
-    public ClienteResponseDto(String clienteId) {
+    public CadastrarClienteResponseDto(String clienteId) {
         this.clienteId = clienteId;
     }
 
-    public ClienteResponseDto(String nome, String email, String senhaCatraca) {
+    public CadastrarClienteResponseDto(String nome, String email, String senhaCatraca) {
         this.nome = nome;
         this.email = email;
         this.senhaCatraca = senhaCatraca;
