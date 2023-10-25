@@ -1,18 +1,23 @@
 package com.api.cliente.controllers.V1;
 
 import com.api.cliente.base.dto.BaseDto;
-import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
-import com.api.cliente.entity.dtos.ClienteRequestDto;
+import com.api.cliente.entity.dtos.AtualizarClienteRequestDto;
+import com.api.cliente.entity.dtos.CadastrarClienteRequestDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.services.v1.AtualizarClienteService;
 import com.api.cliente.services.v1.BuscarClienteService;
 import com.api.cliente.services.v1.CadastrarClienteService;
+import com.api.cliente.services.v1.ListarClientesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,17 +29,19 @@ import java.util.UUID;
 public class ClienteController {
 
     CadastrarClienteService cadastrarClienteService;
-
     AtualizarClienteService atualizarClienteService;
     BuscarClienteService buscarClienteService;
+    ListarClientesService listarClientesService;
 
     public ClienteController(
             CadastrarClienteService cadastrarClienteService,
             AtualizarClienteService atualizarClienteService,
-            BuscarClienteService buscarClienteService) {
+            BuscarClienteService buscarClienteService,
+            ListarClientesService listarClientesService) {
         this.cadastrarClienteService = cadastrarClienteService;
         this.atualizarClienteService = atualizarClienteService;
         this.buscarClienteService = buscarClienteService;
+        this.listarClientesService = listarClientesService;
     }
 
     @Operation(summary = "Cadastra um novo cliente.", method = "POST")
@@ -59,8 +66,8 @@ public class ClienteController {
             })
     })
     @PostMapping
-    public ResponseEntity<BaseDto<ClienteModel>> cadastrarCliente(@RequestBody ClienteRequestDto clienteRequestDto) {
-        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(clienteRequestDto);
+    public ResponseEntity<BaseDto<ClienteModel>> cadastrarCliente(@RequestBody CadastrarClienteRequestDto cadastrarClienteRequestDto) {
+        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(cadastrarClienteRequestDto);
         return ResponseEntity.status(baseDto.getResultado().getStatus()).body(baseDto);
     }
 
@@ -100,8 +107,8 @@ public class ClienteController {
     @PutMapping("/{id}")
     public ResponseEntity<BaseDto<ClienteModel>> atualizarCiente(
             @PathVariable(value = "id") UUID idCliente,
-            @RequestBody ClienteAtualizarRequestDto clienteAtualizarRequestDto) {
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(idCliente, clienteAtualizarRequestDto);
+            @RequestBody AtualizarClienteRequestDto atualizarClienteRequestDto) {
+        BaseDto baseDto = atualizarClienteService.atualizarCliente(idCliente, atualizarClienteRequestDto);
         return ResponseEntity.status(baseDto.getResultado().getStatus()).body(baseDto);
     }
 
@@ -111,4 +118,26 @@ public class ClienteController {
             return ResponseEntity.ok(baseDto);
     }
 
+    @Operation(summary = "Listar clientes.", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Listagem concluída.", content = {
+                    @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(type = "string", example = "Listagem concluída.")
+                    )
+            }),
+            @ApiResponse(responseCode = "400", description = "Dados não encontrados", content = {
+                    @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(type = "string", example = "E-mail já  cadastrado.")
+                    )
+            })
+    })
+    @GetMapping("/listar")
+    public ResponseEntity<BaseDto<ClienteModel>> listarClientes(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) String dataInicial,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) String dataFinal,
+            @RequestParam(required = false) String pagina) {
+        return listarClientesService.listarClientes(dataInicial, dataFinal, pagina);
+    }
 }

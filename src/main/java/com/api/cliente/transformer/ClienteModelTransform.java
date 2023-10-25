@@ -1,28 +1,23 @@
 package com.api.cliente.transformer;
 
-import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
-import com.api.cliente.entity.dtos.ClienteRequestDto;
+import com.api.cliente.entity.dtos.AtualizarClienteRequestDto;
+import com.api.cliente.entity.dtos.CadastrarClienteRequestDto;
 import com.api.cliente.entity.models.ClienteModel;
 
 public class ClienteModelTransform {
 
-    public ClienteModel transformerCadastrarCliente(ClienteRequestDto dto) {
+    public ClienteModel transformerCadastrarCliente(CadastrarClienteRequestDto dto) {
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setNome(dto.getNome());
         clienteModel.setDataNascimento(dto.getDataNascimento());
         clienteModel.setEmail(dto.getEmail());
         clienteModel.setCpf(dto.getCpf());
         clienteModel.setSenhaCatraca(dto.getSenhaCatraca());
-
-        if (dto.getStatus() != null) {
-            clienteModel.setStatus(dto.getStatus());
-        } else {
-            clienteModel.setStatus(1);
-        }
+        clienteModel.setStatus(1);
         return clienteModel;
     }
 
-    public ClienteModel transformerAtualizarCliente(ClienteAtualizarRequestDto dto, ClienteModel clienteModel) {
+    public ClienteModel transformerAtualizarCliente(AtualizarClienteRequestDto dto, ClienteModel clienteModel) {
         if (dto.getEmail() != null && !dto.getEmail().isEmpty()) {
             clienteModel.setEmail(dto.getEmail());
         } else {

@@ -2,6 +2,7 @@ package com.api.cliente.services.v1;
 
 import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.base.dto.BaseResultDto;
+import com.api.cliente.builder.ResponseSuccessBuilder;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class BuscarClienteService {
         Optional<ClienteModel> clienteModel = clienteRepository.findById(id);
         if (clienteModel.isPresent()) {
             var baseResult = new BaseResultDto(HttpStatus.OK.value(), "Cliente escontrado.");
-            var baseDto = new BaseDto<>(clienteModel.get());
+            var baseDto = new ResponseSuccessBuilder<ClienteModel>(HttpStatus.OK, clienteModel.get()).get().getBody();
             baseDto.setResultado(baseResult);
             return baseDto;
         } else {
