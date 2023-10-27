@@ -13,9 +13,12 @@ import com.api.cliente.repositories.ClienteRepository;
 import com.api.cliente.transformer.ClienteModelTransform;
 import com.api.cliente.validate.CadastrarClienteValidate;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -47,7 +50,9 @@ public class CadastrarClienteService {
         ClienteModel clienteModel = new ClienteModelTransform().transformerCadastrarCliente(cadastrarClienteRequestDto);
         UUID cadastrarIdCliente = clienteRepository.save(clienteModel).getId();
         return new ResponseSuccessBuilder<CadastrarClienteResponseDto>(
-            HttpStatus.CREATED,
-            new CadastrarClienteResponseDto(cadastrarIdCliente.toString()), MensagensSucessos.CADASTRADO_COM_SUCESSO).get().getBody();
+                HttpStatus.CREATED,
+                new CadastrarClienteResponseDto(cadastrarIdCliente.toString()), MensagensSucessos.CADASTRADO_COM_SUCESSO).get().getBody();
     }
+
+
 }

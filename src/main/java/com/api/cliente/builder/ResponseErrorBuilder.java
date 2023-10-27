@@ -3,11 +3,15 @@ package com.api.cliente.builder;
 import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.base.dto.BaseResultDto;
+import com.api.cliente.entity.models.ClienteModel;
+import com.api.cliente.repositories.ClienteRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public class ResponseErrorBuilder {
 
@@ -34,4 +38,6 @@ public class ResponseErrorBuilder {
     public ResponseEntity<BaseDto<Void>> get() {
         return resultado;
     }
+
 }
+
