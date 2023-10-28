@@ -112,10 +112,28 @@ public class ClienteController {
         return ResponseEntity.status(baseDto.getResultado().getStatus()).body(baseDto);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<BaseDto<ClienteModel>> buscarCliente(@PathVariable("id") UUID id) {
-            BaseDto<ClienteModel> baseDto = buscarClienteService.buscarCliente(id);
-            return ResponseEntity.ok(baseDto);
+    @Operation(summary = "Buscar um cliente por parametros.", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso.", content = {
+                    @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(type = "string", example = "Cliente encontrado com sucesso.")
+                    )
+            }),
+            @ApiResponse(responseCode = "400", description = "Dados nao encontrados", content = {
+                    @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(type = "string", example = "Dados nao encontrados")
+                    )
+            })
+    })
+    @GetMapping("/")
+    public ResponseEntity<BaseDto<ClienteModel>> buscarCliente(
+            @RequestParam(required = false) String id,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String cpf) {
+        ResponseEntity<BaseDto<ClienteModel>> resultado = buscarClienteService.buscarCliente(id, email, cpf);
+        return resultado;
     }
 
     @Operation(summary = "Listar clientes.", method = "GET")

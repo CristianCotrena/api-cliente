@@ -3,17 +3,30 @@ package com.api.cliente.entity.dtos;
 import java.util.UUID;
 
 public class BuscarClienteDto {
+
     private UUID id;
+    private String nome;
+    private String dataNascimento;
     private String email;
     private String cpf;
-
-    public BuscarClienteDto(UUID id, String email, String cpf) {
-        this.id = id;
-        this.email = email;
-        this.cpf = cpf;
-    }
+    private String senhaCatraca;
 
     public BuscarClienteDto() {
+    }
+
+    public BuscarClienteDto(
+            UUID id,
+            String nome,
+            String dataNascimento,
+            String email,
+            String cpf,
+            String senhaCatraca) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.email = email;
+        this.cpf = cpf;
+        this.senhaCatraca = senhaCatraca;
     }
 
     public UUID getId() {
@@ -22,6 +35,22 @@ public class BuscarClienteDto {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getEmail() {
@@ -38,5 +67,13 @@ public class BuscarClienteDto {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getSenhaCatraca() {
+        return senhaCatraca;
+    }
+
+    public void setSenhaCatraca(String senhaCatraca) {
+        this.senhaCatraca = senhaCatraca;
     }
 }
