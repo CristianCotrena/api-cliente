@@ -12,12 +12,38 @@ FormaNT - API Cliente é uma aplicação web baseada em Java que permite a um ut
 
 # CRUD:
 
-- Método POST criado, recebendo dados através de jason e gerando uma id automaticamente, e preenchendo o status automaticamente com 1, podendo ser preenchido com 0 
+- Método POST criado, recebendo dados através de jason e gerando uma id automaticamente, e preenchendo o status automaticamente com 1, podendo ser preenchido com 0
+  - FORMA DE INSERÇÃO DOS DADOS: na criação de um cliente, o id é gerado automaticamente, e os dados são informado por um json
+      {
+        "nome": "Testando Inserção de Cliente", -> informado entre aspas, é uma string, pelo menos 6 caracteres divididos em duas palavras
+        "dataNascimento": "1958-02-10", -> informado entre aspas, é uma string, formato ISO 8601 (yyyy-MM-dd)
+        "email": "testando@email.com", -> informado entre aspas, é uma string
+        "cpf": "12345678919", -> informado entre aspas, é uma string, todos os caracteres são numéricos e deve conter 11 obrigatoriamente
+        "senhaCatraca": "7576" -> informado entre aspas, é uma string, todos os caracteres são numéricos e deve conter 4 obrigatoriamente
+      }
+
 - Método PUT criado, recebendo dados através de jason, informando uma id já existente, permitindo a alteração apenas do e-mail e da senha da catraca
-- Método GET criado, funciona através do recebido de parametros por query para consulta em banco de dados:
+  - FORMA DE INSERÇÃO DOS DADOS: a id é informada no endpoint, e os dados a serem alterados são recebido por um json
+    {
+      "email": "masouza@email.com", -> informado entre aspas, é uma string
+      "senhaCatraca": "9999" -> informado entre aspas, é uma string, todos os caracteres são numéricos e deve conter 4 obrigatoriamente
+    }
+
+- Método GET criado para o serviço de listagem de clientes, funciona através do recebimento de parametros por query para consulta em banco de dados:
+  - os parâmetros são data inicial, data final e pagina
+  - as datas devem ser informadas de forma conjunta  no formato ISO 8601 (yyyy-MM-dd)
+  - a data inicial deve ser inferior a data final
+  - a paginação deve ser sempre informada, mesmo que seja 0, assim listará todos os registros
+  - o json de retorno mostra o total de páginas e a página atual
+  - devido a forma de se lidar com os dados em listas e paginações no Java, a página atual no retorno sempre será acrescida de 1 (exemplo: pagina informada = 2, pagina atual no retorno = 3)
+
+- Método GET criado para o serviço de busca unitária de um cliente, funciona através do recebimento de parametros por query para consulta em banco de dados:
   - os parâmetros são id, email e cpf
   - podem ser recebidos separadamente ou todos em conjunto
   - deve ser informado ao menos um obrigatoriamente
+  - o id deve ser válido conforme a estrutura do UUID, e deve existir no banco de dados
+  - o email deve ser informado nesse formato: "testando@email.com"
+  - o cpf deve ser informado nesse formato: "12345678919" -> todos os caracteres são numéricos e deve conter 11 obrigatoriamente
 
 <hr/>
 
