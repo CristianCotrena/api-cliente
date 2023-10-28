@@ -16,14 +16,20 @@ FormaNT - API Cliente é uma aplicação web baseada em Java que permite a um ut
   - FORMA DE INSERÇÃO DOS DADOS: na criação de um cliente, o id é gerado automaticamente, e os dados são informado por um json
     - 
     {
-      "nome": "Testando Inserção de Cliente", // informado entre aspas, é uma string, pelo menos 6 caracteres divididos em duas palavras
-      "dataNascimento": "1958-02-10", // informado entre aspas, é uma string, formato ISO 8601 (yyyy-MM-dd)
-      "email": "testando@email.com", // informado entre aspas, é uma string
-      "cpf": "12345678919", // informado entre aspas, é uma string, todos os caracteres são numéricos e deve conter 11 obrigatoriamente
-      "senhaCatraca": "7576" // informado entre aspas, é uma string, todos os caracteres são numéricos e deve conter 4 obrigatoriamente
+      "nome": "Testando Inserção de Cliente",
+      "dataNascimento": "1958-02-10",
+      "email": "testando@email.com",
+      "cpf": "12345678919",
+      "senhaCatraca": "7576"
     }
-
-
+    - | Campo           | Descrição                                                                      |
+      |-----------------|--------------------------------------------------------------------------------|
+      | nome            | Informado entre aspas, é uma string, pelo menos 6 caracteres divididos em duas palavras.     |
+      | dataNascimento  | Informado entre aspas, é uma string, formato ISO 8601 (yyyy-MM-dd).             |
+      | email           | Informado entre aspas, é uma string.                                          |
+      | cpf             | Informado entre aspas, é uma string, todos os caracteres são numéricos e deve conter 11 obrigatoriamente. |
+      | senhaCatraca    | Informado entre aspas, é uma string, todos os caracteres são numéricos e deve conter 4 obrigatoriamente. |
+  
 - Método PUT criado, recebendo dados através de jason, informando uma id já existente, permitindo a alteração apenas do e-mail e da senha da catraca
   - FORMA DE INSERÇÃO DOS DADOS: a id é informada no endpoint, e os dados a serem alterados são recebido por um json
     - 
