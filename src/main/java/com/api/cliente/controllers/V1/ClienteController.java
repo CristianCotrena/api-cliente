@@ -1,8 +1,8 @@
 package com.api.cliente.controllers.V1;
 
 import com.api.cliente.base.dto.BaseDto;
-import com.api.cliente.entity.dtos.AtualizarClienteRequestDto;
 import com.api.cliente.entity.dtos.CadastrarClienteRequestDto;
+import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.services.v1.AtualizarClienteService;
 import com.api.cliente.services.v1.BuscarClienteService;
@@ -14,9 +14,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -67,8 +64,8 @@ public class ClienteController {
     })
     @PostMapping
     public ResponseEntity<BaseDto<ClienteModel>> cadastrarCliente(@RequestBody CadastrarClienteRequestDto cadastrarClienteRequestDto) {
-        BaseDto baseDto = cadastrarClienteService.cadastrarCliente(cadastrarClienteRequestDto);
-        return ResponseEntity.status(baseDto.getResultado().getStatus()).body(baseDto);
+        ResponseEntity<BaseDto<ClienteModel>> resultado = cadastrarClienteService.cadastrarCliente(cadastrarClienteRequestDto);
+        return resultado;
     }
 
     @Operation(summary = "Atualizar um cliente já existente.", method = "PUT")
@@ -106,10 +103,10 @@ public class ClienteController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<BaseDto<ClienteModel>> atualizarCiente(
-            @PathVariable(value = "id") UUID idCliente,
-            @RequestBody AtualizarClienteRequestDto atualizarClienteRequestDto) {
-        BaseDto baseDto = atualizarClienteService.atualizarCliente(idCliente, atualizarClienteRequestDto);
-        return ResponseEntity.status(baseDto.getResultado().getStatus()).body(baseDto);
+            @PathVariable(value = "id") String idCliente,
+            @RequestBody ClienteAtualizarRequestDto clienteAtualizarRequestDto) {
+        ResponseEntity<BaseDto<ClienteModel>> resultado = atualizarClienteService.atualizarCliente(idCliente, clienteAtualizarRequestDto);
+        return resultado;
     }
 
     @Operation(summary = "Buscar um cliente por parametros.", method = "GET")
