@@ -1,12 +1,11 @@
 package com.api.cliente.services.v1;
 
-import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.builder.ResponseErrorBuilder;
 import com.api.cliente.builder.ResponseSuccessBuilder;
 import com.api.cliente.constants.MensagensErros;
-import com.api.cliente.entity.dtos.AtualizarClienteRequestDto;
-import com.api.cliente.entity.dtos.CadastrarClienteResponseDto;
+import com.api.cliente.entity.dtos.AtualizarClienteResponseDto;
+import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
 import com.api.cliente.transformer.ClienteModelTransform;
@@ -14,6 +13,7 @@ import com.api.cliente.validate.AtualizarClienteValidate;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,60 +31,59 @@ public class AtualizarClienteService {
     }
 
     @Transactional
-    public BaseDto atualizarCliente(
-            UUID idCliente,
-            AtualizarClienteRequestDto atualizarClienteRequestDto) {
+    public ResponseEntity atualizarCliente(
+            String idCliente,
+            ClienteAtualizarRequestDto clienteAtualizarRequestDto) {
 
-        List<BaseErrorDto> erros = new AtualizarClienteValidate().validate(atualizarClienteRequestDto);
+        List<BaseErrorDto> erros = new AtualizarClienteValidate().validate(idCliente, clienteAtualizarRequestDto);
         ResponseErrorBuilder resultado = new ResponseErrorBuilder(HttpStatus.BAD_REQUEST, erros);
-        int contadorEmail = 0;
-        int contadorSenhaCatraca = 0;
-
-        if (!clienteRepository.existsById(idCliente)) {
-            erros.add(new BaseErrorDto("Id Cliente.", MensagensErros.INEXISTENTE));
-            return resultado.get().getBody();
+        if (erros.size() > 0) {
+            return resultado.get();
         }
 
-        Optional<ClienteModel> clienteExistente = clienteRepository.findById(idCliente);
+        UUID uuid = UUID.fromString(idCliente);
+        if (!clienteRepository.existsById(uuid)) {
+            erros.add(new BaseErrorDto("id", MensagensErros.INEXISTENTE));
+            return resultado.get();
+        }
+
+        Optional<ClienteModel> clienteExistente = clienteRepository.findById(uuid);
         ClienteModel clienteModel = clienteExistente.get();
 
-        if (atualizarClienteRequestDto.getEmail() != null && !atualizarClienteRequestDto.getEmail().isEmpty()) {
-            if (clienteExistente.get().getEmail().equals(atualizarClienteRequestDto.getEmail())) {
-                erros.add(new BaseErrorDto("E-mail.", MensagensErros.CAMPO_DIFERENTE_ANTERIOR));
-            } else if (clienteRepository.existsByEmail(atualizarClienteRequestDto.getEmail()).orElse(false)) {
-                erros.add(new BaseErrorDto("E-mail.", MensagensErros.DADO_JA_CADASTRADO));
+        if (clienteAtualizarRequestDto.getEmail() != null && !clienteAtualizarRequestDto.getEmail().isEmpty()) {
+            if (clienteExistente.get().getEmail().equals(clienteAtualizarRequestDto.getEmail())) {
+                erros.add(new BaseErrorDto("email", MensagensErros.CAMPO_DIFERENTE_ANTERIOR));
+            } else if (clienteRepository.existsByEmail(clienteAtualizarRequestDto.getEmail()).orElse(false)) {
+                erros.add(new BaseErrorDto("email", MensagensErros.DADO_JA_CADASTRADO));
             }
-            contadorEmail = 1;
         }
-        if (atualizarClienteRequestDto.getSenhaCatraca() != null && !atualizarClienteRequestDto.getSenhaCatraca().isEmpty()) {
-            if (clienteExistente.get().getSenhaCatraca().equals(atualizarClienteRequestDto.getSenhaCatraca())) {
-                erros.add(new BaseErrorDto("Senha da catraca.", MensagensErros.CAMPO_DIFERENTE_ANTERIOR));
+        if (clienteAtualizarRequestDto.getSenhaCatraca() != null && !clienteAtualizarRequestDto.getSenhaCatraca().isEmpty()) {
+            if (clienteExistente.get().getSenhaCatraca().equals(clienteAtualizarRequestDto.getSenhaCatraca())) {
+                erros.add(new BaseErrorDto("senhaCatraca", MensagensErros.CAMPO_DIFERENTE_ANTERIOR));
             }
-            contadorSenhaCatraca = 1;
         }
         if (erros.size() > 0) {
-            return resultado.get().getBody();
+            return resultado.get();
         }
         if (erros.size() > 0) {
             resultado = new ResponseErrorBuilder(HttpStatus.BAD_REQUEST, erros);
-            return resultado.get().getBody();
+            return resultado.get();
         }
-        clienteModel = new ClienteModelTransform().transformerAtualizarCliente(atualizarClienteRequestDto, clienteModel);
+        clienteModel = new ClienteModelTransform().transformerAtualizarCliente(clienteAtualizarRequestDto, clienteModel);
 
         ClienteModel atualizarCliente = clienteRepository.save(clienteModel);
 
-        CadastrarClienteResponseDto resposta = new CadastrarClienteResponseDto();
-        if (contadorEmail == 1 || contadorSenhaCatraca ==1) {
-            resposta = new CadastrarClienteResponseDto(
-                    atualizarCliente.getNome().toString(),
-                    contadorEmail == 1 ? atualizarCliente.getEmail().toString() : null,
-                    contadorSenhaCatraca == 1 ? atualizarCliente.getSenhaCatraca().toString() : null
-            );
-        }
-        return new ResponseSuccessBuilder<CadastrarClienteResponseDto>(
+        AtualizarClienteResponseDto resposta = new AtualizarClienteResponseDto(
+                atualizarCliente.getNome(),
+                atualizarCliente.getEmail(),
+                atualizarCliente.getSenhaCatraca()
+        );
+
+        ResponseSuccessBuilder atualizado = new ResponseSuccessBuilder<AtualizarClienteResponseDto>(
                 HttpStatus.ACCEPTED,
                 resposta,
-                "Atualizado com sucesso.").get().getBody();
-
+                "Atualizado com sucesso."
+        );
+        return atualizado.get();
     }
 }
