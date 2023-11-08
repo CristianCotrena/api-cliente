@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Isabel da Costa Souza\",\r\n    \"dataNascimento\": \"1986-09-30\",\r\n    \"email\": \"isabel.souza@email.com\",\r\n    \"cpf\": \"12345098765\",\r\n    \"senhaCatraca\": \"5544\"\r\n}\r\n",
+							"raw": "{\r\n    \"nome\": \"Testando Inserção de Cliente\",\r\n    \"dataNascimento\": \"1958-02-10\",\r\n    \"email\": \"testando@email.com\",\r\n    \"cpf\": \"12345678919\",\r\n    \"senhaCatraca\": \"7576\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -72,7 +72,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Teste de Criar Cliente\",\r\n    \"dataNascimento\": \"1992-03-03\",\r\n    \"email\": \"testecriarcliente2@gmail.com\",\r\n    \"cpf\": \"09999999999\",\r\n    \"senhaCatraca\": \"3500\"\r\n}\r\n",
+							"raw": "{\r\n    \"nome\": \"Teste de Criar Cliente\",\r\n    \"dataNascimento\": \"1992-03-03\",\r\n    \"email\": \"testecriarcliente2@gmail.com\",\r\n    \"cpf\": \"86936912345\",\r\n    \"senhaCatraca\": \"3500\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -301,7 +301,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"paestrela@gmail.com\",\r\n    \"senhaCatraca\": \"9999\"\r\n}\r\n",
+							"raw": "{\r\n    \"email\": \"masouza@email.com\",\r\n    \"senhaCatraca\": \"9999\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,7 +309,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/v1/cliente/99439b8c-5f5b-4eed-8dd1-c70a3f645989",
+							"raw": "localhost:8080/v1/cliente/c1afbac0-c5fb-4de5-9235-2b5890efffbe",
 							"host": [
 								"localhost"
 							],
@@ -317,7 +317,7 @@
 							"path": [
 								"v1",
 								"cliente",
-								"99439b8c-5f5b-4eed-8dd1-c70a3f645989"
+								"c1afbac0-c5fb-4de5-9235-2b5890efffbe"
 							]
 						}
 					},
@@ -541,7 +541,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -549,7 +549,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/v1/cliente/listar?dataInicial=1990-01-01&dataFinal=2022-12-31&pagina=0",
+							"raw": "localhost:8080/v1/cliente/listar?dataInicial=1980-01-01&dataFinal=2022-12-31&pagina=0",
 							"host": [
 								"localhost"
 							],
@@ -562,7 +562,7 @@
 							"query": [
 								{
 									"key": "dataInicial",
-									"value": "1990-01-01"
+									"value": "1980-01-01"
 								},
 								{
 									"key": "dataFinal",
@@ -587,7 +587,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -595,7 +595,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/v1/cliente/listar?pagina=0",
+							"raw": "localhost:8080/v1/cliente/listar?pagina=2",
 							"host": [
 								"localhost"
 							],
@@ -618,7 +618,7 @@
 								},
 								{
 									"key": "pagina",
-									"value": "0"
+									"value": "2"
 								}
 							]
 						}
@@ -626,7 +626,7 @@
 					"response": []
 				},
 				{
-					"name": "03 - FRACASSO Listar clientes datas fora do padrão",
+					"name": "03 - SUCESSO Listar clientes SEM PARAMETROS",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -635,7 +635,56 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"listar"
+							],
+							"query": [
+								{
+									"key": "dataInicial",
+									"value": "1990-01-01",
+									"disabled": true
+								},
+								{
+									"key": "dataFinal",
+									"value": "2022-12-31",
+									"disabled": true
+								},
+								{
+									"key": "pagina",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - FRACASSO Listar clientes datas fora do padrão",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -672,7 +721,7 @@
 					"response": []
 				},
 				{
-					"name": "04 - FRACASSO Listar clientes pagina inválida",
+					"name": "05 - FRACASSO Listar clientes pagina inválida",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -681,7 +730,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -718,7 +767,7 @@
 					"response": []
 				},
 				{
-					"name": "05 - FRACASSO Listar clientes data inicial maior que final",
+					"name": "06 - FRACASSO Listar clientes data inicial maior que final",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -727,7 +776,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -762,26 +811,19 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Buscar Cliente",
+			"item": [
 				{
-					"name": "06 - FRACASSO Listar clientes sem parâmetros",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "01 - BUSCAR CLIENTE SUCESSO id, email, cpf",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/v1/cliente/listar",
+							"raw": "localhost:8080/v1/cliente/?id=4e50bf0a-6340-40af-8831-b475533b6235&email=carolcandiolli@gmail.com&cpf=00112233445",
 							"host": [
 								"localhost"
 							],
@@ -789,23 +831,684 @@
 							"path": [
 								"v1",
 								"cliente",
-								"listar"
+								""
 							],
 							"query": [
 								{
-									"key": "dataInicial",
-									"value": "1993-12-31",
+									"key": "id",
+									"value": "4e50bf0a-6340-40af-8831-b475533b6235"
+								},
+								{
+									"key": "email",
+									"value": "carolcandiolli@gmail.com"
+								},
+								{
+									"key": "cpf",
+									"value": "00112233445"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02- BUSCAR CLIENTE SUCESSO id, email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=6b626044-434e-4a07-90a4-bce32f941d74&email=esponja@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74"
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com"
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - BUSCAR CLIENTE SUCESSO id, cpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=6b626044-434e-4a07-90a4-bce32f941d74&cpf=11111212131",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74"
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com",
 									"disabled": true
 								},
 								{
-									"key": "dataFinal",
-									"value": "1993-01-01",
+									"key": "cpf",
+									"value": "11111212131"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - BUSCAR CLIENTE SUCESSO email, cpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?email=esponja@gmail.com&cpf=11111212131",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74",
 									"disabled": true
 								},
 								{
-									"key": "pagina",
-									"value": "0",
+									"key": "email",
+									"value": "esponja@gmail.com"
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05 - BUSCAR CLIENTE SUCESSO id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=6b626044-434e-4a07-90a4-bce32f941d74",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74"
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com",
 									"disabled": true
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06 - BUSCAR CLIENTE SUCESSO email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?email=esponja@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com"
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - BUSCAR CLIENTE SUCESSO cpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?cpf=11111212131",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - BUSCAR CLIENTE SUCESSO id, email, cpf (vazio)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=6b626044-434e-4a07-90a4-bce32f941d74&email=esponja@gmail.com&cpf=",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74"
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com"
+								},
+								{
+									"key": "cpf",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - BUSCAR CLIENTE SUCESSO id, email(vazio), cpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=6b626044-434e-4a07-90a4-bce32f941d74&email=&cpf=11111212131",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74"
+								},
+								{
+									"key": "email",
+									"value": ""
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10 - BUSCAR CLIENTE SUCESSO id(vazio), email, cpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=&email=esponja@gmail.com&cpf=11111212131",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com"
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11 - BUSCAR CLIENTE FRACASSO nenhum dado informado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12 - BUSCAR CLIENTE SUCESSO id, email, cpf - todos vazios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=&email=&cpf=",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								},
+								{
+									"key": "email",
+									"value": ""
+								},
+								{
+									"key": "cpf",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "13 - BUSCAR CLIENTE SUCESSO id, email, cpf - dados fora do padrão",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=6b626044434e4a0790a4bce32f941d74&email=esponjagmail.com&cpf=1212131",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044434e4a0790a4bce32f941d74"
+								},
+								{
+									"key": "email",
+									"value": "esponjagmail.com"
+								},
+								{
+									"key": "cpf",
+									"value": "1212131"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "14 - BUSCAR CLIENTE SUCESSO id inexistente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=a25732a5-cf04-4a92-b320-dde0c5a1c1d6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "a25732a5-cf04-4a92-b320-dde0c5a1c1d6"
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "15 - BUSCAR CLIENTE SUCESSO email inexistente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?email=candiolli.escritorio@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "candiolli.escritorio@gmail.com"
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "16 - BUSCAR CLIENTE SUCESSO cpf inexistente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?cpf=03081876010",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "cpf",
+									"value": "03081876010"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "17 - BUSCAR CLIENTE SUCESSO id, email, cpf - não correspondentes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=6b626044-434e-4a07-90a4-bce32f941d74&email=ana.silva@email.com&cpf=31414151516",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74"
+								},
+								{
+									"key": "email",
+									"value": "ana.silva@email.com"
+								},
+								{
+									"key": "cpf",
+									"value": "31414151516"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "18 - BUSCAR CLIENTE SUCESSO id, email (correspondentes) - cpf (difere)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=6b626044-434e-4a07-90a4-bce32f941d74&email=esponja@gmail.com&cpf=12345678901",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74"
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com"
+								},
+								{
+									"key": "cpf",
+									"value": "12345678901"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "19 - BUSCAR CLIENTE SUCESSO id, cpf (correspondem) - email (difere)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=6b626044-434e-4a07-90a4-bce32f941d74&email=ana.silva@email.com&cpf=11111212131",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6b626044-434e-4a07-90a4-bce32f941d74"
+								},
+								{
+									"key": "email",
+									"value": "ana.silva@email.com"
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "20 - BUSCAR CLIENTE SUCESSO email, cpf (correspondem) - id (difere)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/cliente/?id=a4b22da4-795f-4dca-b6a9-440ffe2624c0&email=esponja@gmail.com&cpf=11111212131",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "a4b22da4-795f-4dca-b6a9-440ffe2624c0"
+								},
+								{
+									"key": "email",
+									"value": "esponja@gmail.com"
+								},
+								{
+									"key": "cpf",
+									"value": "11111212131"
 								}
 							]
 						}

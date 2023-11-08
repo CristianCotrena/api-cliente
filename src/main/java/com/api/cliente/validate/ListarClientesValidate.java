@@ -13,11 +13,13 @@ public class ListarClientesValidate {
 
         List<BaseErrorDto> erros = new ArrayList<>();
 
+        /**
         if ((dataInicial == null || dataInicial.isEmpty())
                 && (dataFinal == null || dataFinal.isEmpty())
                 && (pagina == null || pagina.isEmpty())) {
             erros.add(new BaseErrorDto("dataNascimento, pagina", MensagensErros.UM_CAMPO_EXIGIDO));
         }
+         **/
 
         if ((dataInicial != null && !dataInicial.isEmpty()) && (dataFinal == null || dataFinal.isEmpty())) {
             erros.add(new BaseErrorDto("dataNascimento", MensagensErros.DUAS_DATAS));
@@ -46,9 +48,12 @@ public class ListarClientesValidate {
                 erros.add(new BaseErrorDto("pagina", MensagensErros.PAGINA_INVALIDA));
             }
         }
+
+        /**
         if (pagina == null || pagina.isEmpty()) {
             erros.add(new BaseErrorDto("pagina", MensagensErros.PAGINA_OBRIGATORIA));
         }
+         **/
 
         return erros;
     }

@@ -12,8 +12,10 @@ FormaNT - API Cliente é uma aplicação web baseada em Java que permite a um ut
 
 # CRUD:
 
-- Método POST criado, recebendo dados através de jason e gerando uma id automaticamente, e preenchendo o status automaticamente com 1, podendo ser preenchido com 0 
-- Método PUT criado, recebendo dados através de jason, informando uma id já existente, permitindo a alteração apenas do e-mail e da senha da catraca
+- Método POST
+- Método PUT
+- Método GET - listar clientes
+- Método GET - buscar um cliente
 
 <hr/>
 
