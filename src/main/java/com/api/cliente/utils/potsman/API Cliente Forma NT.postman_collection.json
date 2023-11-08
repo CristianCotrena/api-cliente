@@ -541,7 +541,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -549,7 +549,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/v1/cliente/listar?dataInicial=1990-01-01&dataFinal=2022-12-31&pagina=0",
+							"raw": "localhost:8080/v1/cliente/listar?dataInicial=1980-01-01&dataFinal=2022-12-31&pagina=0",
 							"host": [
 								"localhost"
 							],
@@ -562,7 +562,7 @@
 							"query": [
 								{
 									"key": "dataInicial",
-									"value": "1990-01-01"
+									"value": "1980-01-01"
 								},
 								{
 									"key": "dataFinal",
@@ -587,7 +587,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -595,7 +595,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/v1/cliente/listar?pagina=0",
+							"raw": "localhost:8080/v1/cliente/listar?pagina=2",
 							"host": [
 								"localhost"
 							],
@@ -618,7 +618,7 @@
 								},
 								{
 									"key": "pagina",
-									"value": "0"
+									"value": "2"
 								}
 							]
 						}
@@ -626,7 +626,7 @@
 					"response": []
 				},
 				{
-					"name": "03 - FRACASSO Listar clientes datas fora do padrão",
+					"name": "03 - SUCESSO Listar clientes SEM PARAMETROS",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -635,7 +635,56 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/cliente/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cliente",
+								"listar"
+							],
+							"query": [
+								{
+									"key": "dataInicial",
+									"value": "1990-01-01",
+									"disabled": true
+								},
+								{
+									"key": "dataFinal",
+									"value": "2022-12-31",
+									"disabled": true
+								},
+								{
+									"key": "pagina",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - FRACASSO Listar clientes datas fora do padrão",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -672,7 +721,7 @@
 					"response": []
 				},
 				{
-					"name": "04 - FRACASSO Listar clientes pagina inválida",
+					"name": "05 - FRACASSO Listar clientes pagina inválida",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -681,7 +730,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -718,7 +767,7 @@
 					"response": []
 				},
 				{
-					"name": "05 - FRACASSO Listar clientes data inicial maior que final",
+					"name": "06 - FRACASSO Listar clientes data inicial maior que final",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -727,7 +776,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -757,55 +806,6 @@
 								{
 									"key": "pagina",
 									"value": "0"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "06 - FRACASSO Listar clientes sem parâmetros",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"alexandrederossi@gmail.com\",\r\n    \"senhaCatraca\": \"1903\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/v1/cliente/listar",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"cliente",
-								"listar"
-							],
-							"query": [
-								{
-									"key": "dataInicial",
-									"value": "1993-12-31",
-									"disabled": true
-								},
-								{
-									"key": "dataFinal",
-									"value": "1993-01-01",
-									"disabled": true
-								},
-								{
-									"key": "pagina",
-									"value": "0",
-									"disabled": true
 								}
 							]
 						}

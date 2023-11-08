@@ -1,10 +1,7 @@
 package com.api.cliente.service.v1;
 
 import com.api.cliente.base.dto.BaseDto;
-import com.api.cliente.base.dto.BaseErrorDto;
-import com.api.cliente.base.dto.BaseResultDto;
 import com.api.cliente.entity.dtos.AtualizarClienteResponseDto;
-import com.api.cliente.entity.dtos.CadastrarClienteResponseDto;
 import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.mock.ClienteAtualizarRequestDtoBuilder;
@@ -20,7 +17,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,7 +54,7 @@ class AtualizarClienteServiceTests {
         when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
         ResponseEntity<BaseDto<ClienteModel>> resultado = atualizarClienteService.atualizarCliente(
-                clienteModel.getId(),
+                clienteModel.getId().toString(),
                 clienteAtualizarRequestDto
         );
         AtualizarClienteResponseDto atualizarClienteResponseDto = new AtualizarClienteResponseDto(
@@ -86,7 +82,7 @@ class AtualizarClienteServiceTests {
         when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
         ResponseEntity<BaseDto<ClienteModel>> resultado = atualizarClienteService.atualizarCliente(
-                clienteModel.getId(),
+                clienteModel.getId().toString(),
                 clienteAtualizarRequestDto
         );
         AtualizarClienteResponseDto atualizarClienteResponseDto = new AtualizarClienteResponseDto(
@@ -113,7 +109,7 @@ class AtualizarClienteServiceTests {
         when(clienteRepository.save(any(ClienteModel.class))).thenReturn(clienteModel);
 
         ResponseEntity<BaseDto<ClienteModel>> resultado = atualizarClienteService.atualizarCliente(
-                clienteModel.getId(),
+                clienteModel.getId().toString(),
                 clienteAtualizarRequestDto
         );
         AtualizarClienteResponseDto atualizarClienteResponseDto = new AtualizarClienteResponseDto(
@@ -135,7 +131,7 @@ class AtualizarClienteServiceTests {
         when(clienteRepository.existsById(clienteModel.getId())).thenReturn(false);
 
         ResponseEntity<BaseDto<ClienteModel>> resultado = atualizarClienteService.atualizarCliente(
-                clienteModel.getId(),
+                clienteModel.getId().toString(),
                 clienteAtualizarRequestDto
         );
 
@@ -153,7 +149,7 @@ class AtualizarClienteServiceTests {
         when(clienteRepository.existsByEmail(any(String.class))).thenReturn(Optional.of(true));
 
         ResponseEntity<BaseDto<ClienteModel>> resultado = atualizarClienteService.atualizarCliente(
-                clienteModel.getId(),
+                clienteModel.getId().toString(),
                 clienteAtualizarRequestDto
         );
 
@@ -171,7 +167,7 @@ class AtualizarClienteServiceTests {
         clienteAtualizarRequestDto.setEmail(clienteModel.getEmail());
 
         ResponseEntity<BaseDto<ClienteModel>> resultado = atualizarClienteService.atualizarCliente(
-                clienteModel.getId(),
+                clienteModel.getId().toString(),
                 clienteAtualizarRequestDto
         );
 
@@ -190,7 +186,7 @@ class AtualizarClienteServiceTests {
         clienteAtualizarRequestDto.setSenhaCatraca(clienteModel.getSenhaCatraca());
 
         ResponseEntity<BaseDto<ClienteModel>> resultado = atualizarClienteService.atualizarCliente(
-                clienteModel.getId(),
+                clienteModel.getId().toString(),
                 clienteAtualizarRequestDto
         );
 
@@ -210,7 +206,7 @@ class AtualizarClienteServiceTests {
         clienteAtualizarRequestDto.setSenhaCatraca(clienteModel.getSenhaCatraca());
 
         ResponseEntity<BaseDto<ClienteModel>> resultado = atualizarClienteService.atualizarCliente(
-                clienteModel.getId(),
+                clienteModel.getId().toString(),
                 clienteAtualizarRequestDto
         );
 

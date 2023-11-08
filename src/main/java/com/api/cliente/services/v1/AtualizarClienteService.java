@@ -70,7 +70,7 @@ public class AtualizarClienteService {
             return resultado.get();
         }
         clienteModel = new ClienteModelTransform().transformerAtualizarCliente(clienteAtualizarRequestDto, clienteModel);
-
+        
         ClienteModel atualizarCliente = clienteRepository.save(clienteModel);
 
         AtualizarClienteResponseDto resposta = new AtualizarClienteResponseDto(

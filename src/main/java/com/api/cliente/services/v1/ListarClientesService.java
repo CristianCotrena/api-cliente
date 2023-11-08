@@ -32,6 +32,10 @@ public class ListarClientesService {
 
     public ResponseEntity listarClientes(String dataInicial, String dataFinal, String pagina) {
 
+        if (pagina == null || pagina.isEmpty()) {
+            pagina = "0";
+        }
+
         List<BaseErrorDto> erros = new ListarClientesValidate().validarParametros(dataInicial, dataFinal, pagina);
         if (erros.size() > 0) {
             ResponseErrorBuilder resultado = new ResponseErrorBuilder(HttpStatus.BAD_REQUEST, erros);
@@ -39,14 +43,9 @@ public class ListarClientesService {
         }
 
         Page<ClienteModel> clientes;
-        if (pagina != null || !pagina.isEmpty()) {
-            int numero = Integer.parseInt(pagina);
-            Pageable paginaSolicitada = PageRequest.of(numero, 10, Sort.by(Sort.Order.asc("dataNascimento")));
-            clientes = clienteRepository.findAll(buscaPorData(dataInicial, dataFinal), paginaSolicitada);
-        } else {
-            Pageable paginaSolicitada = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("dataNascimento")));
-            clientes = clienteRepository.findAll(buscaPorData(dataInicial, dataFinal), paginaSolicitada);
-        }
+        int numero = Integer.parseInt(pagina);
+        Pageable paginaSolicitada = PageRequest.of(numero, 10, Sort.by(Sort.Order.asc("dataNascimento")));
+        clientes = clienteRepository.findAll(buscaPorData(dataInicial, dataFinal), paginaSolicitada);
 
         if (clientes.isEmpty()) {
             ResponseErrorBuilder resultado = new ResponseErrorBuilder(HttpStatus.BAD_REQUEST, MensagensErros.DADOS_NAO_ENCONTRADO);
