@@ -10,14 +10,6 @@ FormaNT - API Cliente é uma aplicação web baseada em Java que permite a um ut
 
 <hr/>
 
-# CRUD:
-
-- Método POST criado, recebendo dados através de jason e gerando uma id automaticamente, e preenchendo o status automaticamente com 1, podendo ser preenchido com 0 
-- Método PUT criado, recebendo dados através de jason, informando uma id já existente, permitindo a alteração apenas do e-mail e da senha da catraca
-- Método DELETE criado, deleta cliente pelo ID e realiza uma exclusão lógica mudando status do cliente de 1, ativo para 0, inativo.
-
-<hr/>
-
 # SWAGGER:
 A url para acessar a documentação da API é a seguinte: http://localhost:8080/swagger-ui/index.html
 
