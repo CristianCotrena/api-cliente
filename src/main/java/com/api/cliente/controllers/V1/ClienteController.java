@@ -4,19 +4,13 @@ import com.api.cliente.base.dto.BaseDto;
 import com.api.cliente.entity.dtos.AtualizarClienteRequestDto;
 import com.api.cliente.entity.dtos.CadastrarClienteRequestDto;
 import com.api.cliente.entity.models.ClienteModel;
-import com.api.cliente.services.v1.AtualizarClienteService;
-import com.api.cliente.services.v1.BuscarClienteService;
-import com.api.cliente.services.v1.CadastrarClienteService;
-import com.api.cliente.services.v1.ListarClientesService;
+import com.api.cliente.services.v1.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,16 +26,19 @@ public class ClienteController {
     AtualizarClienteService atualizarClienteService;
     BuscarClienteService buscarClienteService;
     ListarClientesService listarClientesService;
+    DeletarClienteService deletarClienteService;
 
     public ClienteController(
             CadastrarClienteService cadastrarClienteService,
             AtualizarClienteService atualizarClienteService,
             BuscarClienteService buscarClienteService,
-            ListarClientesService listarClientesService) {
+            ListarClientesService listarClientesService,
+            DeletarClienteService deletarClienteService) {
         this.cadastrarClienteService = cadastrarClienteService;
         this.atualizarClienteService = atualizarClienteService;
         this.buscarClienteService = buscarClienteService;
         this.listarClientesService = listarClientesService;
+        this.deletarClienteService = deletarClienteService;
     }
 
     @Operation(summary = "Cadastra um novo cliente.", method = "POST")
@@ -140,4 +137,10 @@ public class ClienteController {
             @RequestParam(required = false) String pagina) {
         return listarClientesService.listarClientes(dataInicial, dataFinal, pagina);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<BaseDto<Void>> deletarCliente(@PathVariable(value = "id")UUID id){
+        return (ResponseEntity<BaseDto<Void>>) deletarClienteService.inativarCliente(id);
+
+    }
+
 }
