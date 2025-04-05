@@ -1,15 +1,16 @@
 package com.api.cliente.entity.models;
 
-import com.api.cliente.entity.dtos.InserirDadosClienteDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Table(name = "Clientes")
+@Getter
 public class ClienteModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
