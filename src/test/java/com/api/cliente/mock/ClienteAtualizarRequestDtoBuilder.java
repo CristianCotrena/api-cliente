@@ -1,13 +1,12 @@
 package com.api.cliente.mock;
 
-import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
-import com.api.cliente.entity.dtos.ClienteRequestDto;
+import com.api.cliente.entity.dtos.AtualizarClienteRequestDto;
 
 public class ClienteAtualizarRequestDtoBuilder {
 
-    public static ClienteAtualizarRequestDto build() {
+    public static AtualizarClienteRequestDto build() {
 
-        var request = new ClienteAtualizarRequestDto();
+        var request = new AtualizarClienteRequestDto();
         request.setEmail("emailrequestdto@email.com");
         request.setSenhaCatraca("9999");
         return request;

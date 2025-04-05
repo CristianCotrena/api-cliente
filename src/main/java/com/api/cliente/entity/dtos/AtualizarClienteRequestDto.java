@@ -1,14 +1,14 @@
 package com.api.cliente.entity.dtos;
 
-public class ClienteAtualizarRequestDto {
+public class AtualizarClienteRequestDto {
 
     private String email;
     private String senhaCatraca;
 
-    public ClienteAtualizarRequestDto() {
+    public AtualizarClienteRequestDto() {
     }
 
-    public ClienteAtualizarRequestDto(String email, String senhaCatraca) {
+    public AtualizarClienteRequestDto(String email, String senhaCatraca) {
         this.email = email;
         this.senhaCatraca = senhaCatraca;
     }

@@ -5,8 +5,8 @@ import com.api.cliente.base.dto.BaseErrorDto;
 import com.api.cliente.builder.ResponseErrorBuilder;
 import com.api.cliente.builder.ResponseSuccessBuilder;
 import com.api.cliente.constants.MensagensErros;
-import com.api.cliente.entity.dtos.ClienteAtualizarRequestDto;
-import com.api.cliente.entity.dtos.ClienteResponseDto;
+import com.api.cliente.entity.dtos.AtualizarClienteRequestDto;
+import com.api.cliente.entity.dtos.CadastrarClienteResponseDto;
 import com.api.cliente.entity.models.ClienteModel;
 import com.api.cliente.repositories.ClienteRepository;
 import com.api.cliente.transformer.ClienteModelTransform;
@@ -33,9 +33,9 @@ public class AtualizarClienteService {
     @Transactional
     public BaseDto atualizarCliente(
             UUID idCliente,
-            ClienteAtualizarRequestDto clienteAtualizarRequestDto) {
+            AtualizarClienteRequestDto atualizarClienteRequestDto) {
 
-        List<BaseErrorDto> erros = new AtualizarClienteValidate().validate(clienteAtualizarRequestDto);
+        List<BaseErrorDto> erros = new AtualizarClienteValidate().validate(atualizarClienteRequestDto);
         ResponseErrorBuilder resultado = new ResponseErrorBuilder(HttpStatus.BAD_REQUEST, erros);
         int contadorEmail = 0;
         int contadorSenhaCatraca = 0;
@@ -48,16 +48,16 @@ public class AtualizarClienteService {
         Optional<ClienteModel> clienteExistente = clienteRepository.findById(idCliente);
         ClienteModel clienteModel = clienteExistente.get();
 
-        if (clienteAtualizarRequestDto.getEmail() != null && !clienteAtualizarRequestDto.getEmail().isEmpty()) {
-            if (clienteExistente.get().getEmail().equals(clienteAtualizarRequestDto.getEmail())) {
+        if (atualizarClienteRequestDto.getEmail() != null && !atualizarClienteRequestDto.getEmail().isEmpty()) {
+            if (clienteExistente.get().getEmail().equals(atualizarClienteRequestDto.getEmail())) {
                 erros.add(new BaseErrorDto("E-mail.", MensagensErros.CAMPO_DIFERENTE_ANTERIOR));
-            } else if (clienteRepository.existsByEmail(clienteAtualizarRequestDto.getEmail()).orElse(false)) {
+            } else if (clienteRepository.existsByEmail(atualizarClienteRequestDto.getEmail()).orElse(false)) {
                 erros.add(new BaseErrorDto("E-mail.", MensagensErros.DADO_JA_CADASTRADO));
             }
             contadorEmail = 1;
         }
-        if (clienteAtualizarRequestDto.getSenhaCatraca() != null && !clienteAtualizarRequestDto.getSenhaCatraca().isEmpty()) {
-            if (clienteExistente.get().getSenhaCatraca().equals(clienteAtualizarRequestDto.getSenhaCatraca())) {
+        if (atualizarClienteRequestDto.getSenhaCatraca() != null && !atualizarClienteRequestDto.getSenhaCatraca().isEmpty()) {
+            if (clienteExistente.get().getSenhaCatraca().equals(atualizarClienteRequestDto.getSenhaCatraca())) {
                 erros.add(new BaseErrorDto("Senha da catraca.", MensagensErros.CAMPO_DIFERENTE_ANTERIOR));
             }
             contadorSenhaCatraca = 1;
@@ -69,19 +69,19 @@ public class AtualizarClienteService {
             resultado = new ResponseErrorBuilder(HttpStatus.BAD_REQUEST, erros);
             return resultado.get().getBody();
         }
-        clienteModel = new ClienteModelTransform().transformerAtualizarCliente(clienteAtualizarRequestDto, clienteModel);
+        clienteModel = new ClienteModelTransform().transformerAtualizarCliente(atualizarClienteRequestDto, clienteModel);
 
         ClienteModel atualizarCliente = clienteRepository.save(clienteModel);
 
-        ClienteResponseDto resposta = new ClienteResponseDto();
+        CadastrarClienteResponseDto resposta = new CadastrarClienteResponseDto();
         if (contadorEmail == 1 || contadorSenhaCatraca ==1) {
-            resposta = new ClienteResponseDto(
+            resposta = new CadastrarClienteResponseDto(
                     atualizarCliente.getNome().toString(),
                     contadorEmail == 1 ? atualizarCliente.getEmail().toString() : null,
                     contadorSenhaCatraca == 1 ? atualizarCliente.getSenhaCatraca().toString() : null
             );
         }
-        return new ResponseSuccessBuilder<ClienteResponseDto>(
+        return new ResponseSuccessBuilder<CadastrarClienteResponseDto>(
                 HttpStatus.ACCEPTED,
                 resposta,
                 "Atualizado com sucesso.").get().getBody();

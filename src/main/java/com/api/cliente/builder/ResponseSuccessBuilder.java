@@ -11,13 +11,13 @@ public class ResponseSuccessBuilder<T> {
 
     public ResponseSuccessBuilder(HttpStatus status, T dados, String mensagem) {
         BaseResultDto resultado = new BaseResultDto(status.value(), mensagem);
-        BaseDto<T> baseDto = new BaseDto<>(dados);
+        BaseDto<T> baseDto = new BaseDto<>(dados, null, resultado);
         this.resultado = ResponseEntity.status(status.value()).body(baseDto);
     }
 
     public ResponseSuccessBuilder(HttpStatus status, T dados) {
         BaseResultDto resultado = new BaseResultDto(status.value(), status.getReasonPhrase());
-        BaseDto<T> baseDto = new BaseDto<>(dados);
+        BaseDto<T> baseDto = new BaseDto<>(dados, null, resultado);
         this.resultado = ResponseEntity.status(status.value()).body(baseDto);
     }
 

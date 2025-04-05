@@ -1,6 +1,6 @@
 package com.api.cliente.entity.dtos;
 
-public class ClienteRequestDto {
+public class CadastrarClienteRequestDto {
 
     private String nome;
     private String dataNascimento;
@@ -9,11 +9,11 @@ public class ClienteRequestDto {
     private String senhaCatraca;
     private Integer status;
 
-    public ClienteRequestDto() {
+    public CadastrarClienteRequestDto() {
 
     }
 
-    public ClienteRequestDto(
+    public CadastrarClienteRequestDto(
             String nome,
             String dataNascimento,
             String email,
